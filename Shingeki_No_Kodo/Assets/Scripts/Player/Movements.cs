@@ -14,8 +14,8 @@ public class Movements : MonoBehaviour
         this.rb = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
     }
-
-    private void OnMovement(Vector2 direction)
+    
+    private void OnMovement(Vector2 direction) //Thomas: Che schifo questo movimento rifallo
     {
          if(direction != Vector2.zero)
         {
