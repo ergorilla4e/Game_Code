@@ -14,7 +14,7 @@ public class Movements : MonoBehaviour
         this.rb = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
     }
-    //Anatra
+
     private void OnMovement(Vector2 direction)
     {
          if(direction != Vector2.zero)
