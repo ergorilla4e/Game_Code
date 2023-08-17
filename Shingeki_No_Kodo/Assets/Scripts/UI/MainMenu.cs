@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-  public void PlayGame()
+
+    public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        PassaggioScene.Instance.StartFadeToOpaque(
+            ()=>
+            {
+                SceneManager.LoadScene(1);
+                PassaggioScene.Instance.StartFadeToTransparent();
+            });
     }
 
     public void QuitGame()
