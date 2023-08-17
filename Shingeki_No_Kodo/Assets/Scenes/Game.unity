@@ -2090,7 +2090,7 @@ Transform:
   - {fileID: 1226785667}
   - {fileID: 1052744143}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205366597
 GameObject:
@@ -2104,7 +2104,7 @@ GameObject:
   - component: {fileID: 205366599}
   - component: {fileID: 205366598}
   m_Layer: 0
-  m_Name: Cliente_Barbuto
+  m_Name: Cliente2_Barbuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2194,7 +2194,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &233398086
 GameObject:
@@ -2262,7 +2262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248163900
 GameObject:
@@ -2279,7 +2279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &248163901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2490,7 +2490,7 @@ Transform:
   - {fileID: 1935099265}
   - {fileID: 753305650}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -2658,7 +2658,7 @@ GameObject:
   - component: {fileID: 708328866}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2728,7 +2728,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &708328863
 MonoBehaviour:
@@ -3770,7 +3770,7 @@ GameObject:
   - component: {fileID: 889273567}
   - component: {fileID: 889273569}
   m_Layer: 0
-  m_Name: Cliente_Camicia_Cravatta
+  m_Name: Cliente3_Camicia_Cravatta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3841,7 +3841,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &889273569
 MonoBehaviour:
@@ -3874,7 +3874,7 @@ GameObject:
   - component: {fileID: 890296983}
   - component: {fileID: 890296982}
   m_Layer: 0
-  m_Name: Cliente_Camicia_Blu
+  m_Name: Cliente4_Camicia_Blu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3984,7 +3984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &897494967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,7 +4062,7 @@ RectTransform:
   - {fileID: 1976223269}
   - {fileID: 248163901}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4178,7 +4178,7 @@ GameObject:
   - component: {fileID: 1014750144}
   - component: {fileID: 1014750143}
   m_Layer: 6
-  m_Name: Cliente_Biondo_Con_Occhiali
+  m_Name: Cliente1_Biondo_Con_Occhiali
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4202,7 +4202,7 @@ MonoBehaviour:
   - {fileID: 1557912934}
   - {fileID: 1215238898}
   MoveSpeed: 5
-  Pazienza: 2
+  Pazienza: 10
 --- !u!212 &1014750144
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4268,7 +4268,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1052744142
 GameObject:
@@ -5619,10 +5619,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.9
-  m_fontSizeBase: 36
+  m_fontSize: 54
+  m_fontSizeBase: 54
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -21160,7 +21160,7 @@ Transform:
   - {fileID: 1954440602}
   - {fileID: 1467949695}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557912933
 GameObject:
@@ -25721,6 +25721,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1833471389}
   - component: {fileID: 1833471388}
+  - component: {fileID: 1833471390}
+  - component: {fileID: 1833471391}
   m_Layer: 0
   m_Name: Cucina
   m_TagString: Untagged
@@ -25788,13 +25790,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833471387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -11, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1833471390
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833471387}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.3}
+  m_Size: {x: 1.6, y: 3}
+  m_Direction: 0
+--- !u!114 &1833471391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833471387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d97176e35296e34a8bada116a8f0c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 248163900}
+  textComoponent: {fileID: 1130273935}
+  lines:
+  - Ciao, io sono il cuoco, durante le giornate portami gli ordini.
+  - Sai che puoi interagire con gli oggetti?
+  - Prova a premere "Space" vicino alla porta durante l'orario di chiusura.
+  speedText: 0.05
+  playerIsCloser: 0
 --- !u!1 &1857138330
 GameObject:
   m_ObjectHideFlags: 0
@@ -25981,7 +26019,7 @@ Transform:
   - {fileID: 1557912934}
   - {fileID: 1215238898}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1901358912
 PrefabInstance:
@@ -26307,7 +26345,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952759845
 MonoBehaviour:
@@ -26458,7 +26496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1976223269
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26666,7 +26704,7 @@ Transform:
   - {fileID: 1939861447}
   - {fileID: 1241870664}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2088723234
 GameObject:

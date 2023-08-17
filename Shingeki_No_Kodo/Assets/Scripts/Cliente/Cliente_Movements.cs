@@ -53,7 +53,7 @@ public class Cliente_Movements : MonoBehaviour
         #endregion
 
         
-        //TODO
+        //TODO richeste random di bubbleTea (Switch case + random);
 
 
     }
