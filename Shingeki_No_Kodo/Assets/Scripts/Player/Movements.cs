@@ -9,6 +9,7 @@ public class Movements : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+   
     private void Awake()
     {
         this.rb = GetComponent<Rigidbody2D>();
