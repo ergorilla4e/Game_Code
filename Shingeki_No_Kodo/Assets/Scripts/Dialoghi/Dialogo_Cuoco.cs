@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class Dialogo_Cuoco : MonoBehaviour
 {
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private GameObject dialogueSprite;
     [SerializeField] private TextMeshProUGUI textComoponent;
     [SerializeField] private string[] lines;
     [SerializeField] private float speedText;
@@ -20,6 +21,7 @@ public class Dialogo_Cuoco : MonoBehaviour
     private void Start()
     {
         textComoponent.text = string.Empty;
+        dialogueSprite.SetActive(true);
     }
 
     private void Update()
@@ -46,6 +48,7 @@ public class Dialogo_Cuoco : MonoBehaviour
             }
             else
             {
+                dialogueSprite.SetActive(false);
                 dialoguePanel.SetActive(true);
                 StartDialog();
             }

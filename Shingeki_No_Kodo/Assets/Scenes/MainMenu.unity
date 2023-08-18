@@ -2180,8 +2180,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3831565804943154218, guid: 57265bd87ae34dc4eb5f96cd1c7a3569, type: 3}
       propertyPath: m_Name
-      value: Volume
+      value: Informazioni sul gioco
       objectReference: {fileID: 0}
+    - target: {fileID: 3831565804943154220, guid: 57265bd87ae34dc4eb5f96cd1c7a3569, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1987197094, guid: 610eb5352c33cdb42845050743a6361f, type: 3}
     - target: {fileID: 3831565805886911167, guid: 57265bd87ae34dc4eb5f96cd1c7a3569, type: 3}
       propertyPath: m_Name
       value: Outline
@@ -3138,6 +3142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 3831565804943154220, guid: 57265bd87ae34dc4eb5f96cd1c7a3569, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1800537389, guid: 610eb5352c33cdb42845050743a6361f, type: 3}
     - target: {fileID: 3831565805886911167, guid: 57265bd87ae34dc4eb5f96cd1c7a3569, type: 3}
       propertyPath: m_Name
       value: Outline
