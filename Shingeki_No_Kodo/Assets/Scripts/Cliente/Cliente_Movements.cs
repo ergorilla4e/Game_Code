@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using TMPro.Examples;
+using UnityEditor;
 using UnityEngine;
 
 public class Cliente_Movements : MonoBehaviour
@@ -10,12 +14,31 @@ public class Cliente_Movements : MonoBehaviour
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float Pazienza = 2;
 
+    public enum iconType
+    {
+        happy,
+        neutral,
+        angry
+    }
+
+    [SerializeField] private GameObject balloon;
+    [SerializeField] private GameObject happyIconSprite;
+    [SerializeField] private GameObject neutralIconSprite;
+    [SerializeField] private GameObject angryIconSprite;
+
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
-
+    private bool playerIsCloser;
+    
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
+
+        balloon.SetActive(false);
+        happyIconSprite.SetActive(false);
+        neutralIconSprite.SetActive(false);
+        angryIconSprite.SetActive(false);
+
     }
 
     void Update()
@@ -52,13 +75,74 @@ public class Cliente_Movements : MonoBehaviour
 
         #endregion
 
-        
+
         //TODO richeste random di bubbleTea (Switch case + random);
 
+        #region DIALOGO_CLIENTE_GIOCATORE
+        
+        if(playerIsCloser)
+        {
+            chooseIcon();
+            balloon.SetActive(true);
+        }
+        else
+        {
+            balloon.SetActive(false);
+            happyIconSprite.SetActive(false);
+            neutralIconSprite.SetActive(false);
+            angryIconSprite.SetActive(false);
+        }
+        #endregion
 
     }
 
+    public void chooseIcon()
+    {
+        if(_tempoAtteso<=3)
+        {
+            getIconSprite(iconType.happy);
+        }
+        else if(_tempoAtteso<=6 && _tempoAtteso>3)
+        {
+            getIconSprite(iconType.neutral);
+        }
+        else if(_tempoAtteso>6)
+        {
+            getIconSprite(iconType.angry);
+        }
+    }
+    public void getIconSprite (iconType icon)
+    {
+        switch (icon)
+        {
+            default:
+            case iconType.happy:
+                happyIconSprite.SetActive(true);
+                break;
+            case iconType.neutral:
+                neutralIconSprite.SetActive(true);
+                break;
+            case iconType.angry:
+                angryIconSprite.SetActive(true);
+                break;
+        }
+    }
+   
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+      if (other.CompareTag ("Player"))
+        {
+            playerIsCloser = true;
+        }
+    }
 
-
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerIsCloser = false;
+           
+        }
+    }
 
 }

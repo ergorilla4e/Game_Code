@@ -15,7 +15,7 @@ public class Dialogo_Cuoco : MonoBehaviour
     [SerializeField] private float speedText;
 
     private int _index;
-    public bool playerIsCloser;
+    private bool playerIsCloser;
 
     private void Start()
     {
