@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class RandomSpawner : MonoBehaviour
+{
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] public GameObject[] clientPrefabs;
+    [SerializeField] private Clock clock;
+
+    public List<int> _indiciOccupati = new List<int>();
+    public List<int> indiciLiberi;
+
+    private void Start()
+    {
+        StartCoroutine(SpawnInTime());
+    }
+
+    IEnumerator SpawnInTime()
+    {
+        while (true)
+        {
+            if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura())
+            {
+                if (_indiciOccupati.Count < 5)
+                {
+                    int randomIndex = GetRandomAvailableIndex();
+
+                    if (randomIndex != -1)
+                    {
+                        Instantiate(clientPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+                        _indiciOccupati.Add(randomIndex);
+                    }
+                }
+            }
+            else
+            {
+                _indiciOccupati.Clear();
+            }
+
+            for (int i = 0; i < clientPrefabs.Length; i++)
+            {
+                if (clientPrefabs[i].IsDestroyed())
+                {
+                    _indiciOccupati.RemoveAt(i);
+                    Debug.Log(_indiciOccupati[i]);
+                }
+            }
+
+            yield return new WaitForSeconds(Random.Range(3, 14));
+        }
+    }
+
+    private int GetRandomAvailableIndex()
+    {
+        indiciLiberi = new List<int>();
+
+        for (int i = 0; i < clientPrefabs.Length; i++)
+        {
+            if (!_indiciOccupati.Contains(i))
+            {
+                indiciLiberi.Add(i);
+            }
+        }
+
+        if (indiciLiberi.Count > 0)
+        {
+            return indiciLiberi[Random.Range(0, indiciLiberi.Count)];
+        }
+
+        return -1;
+    }
+}

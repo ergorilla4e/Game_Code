@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class Clock : MonoBehaviour
 {
@@ -12,10 +14,25 @@ public class Clock : MonoBehaviour
     [SerializeField] private int velocitaTimerApertura = 3;
     [SerializeField] private int velocitaTimerChiusura = 10;
 
+    private int contatoreGiorni;
+    private int tempoDiApertura = 480;
+    private int tempoDiChiusura = 1200;
+
     // Start is called before the first frame update
     void Start()
     {
         timeIsRunning = true;
+        contatoreGiorni = 0;
+    }
+
+    public int GetTempoDiApertura()
+    {
+        return tempoDiApertura;
+    }
+
+    public int GetTempoDiChiusura()
+    {
+        return tempoDiChiusura;
     }
 
     public float GetTimeRemaining()
@@ -31,11 +48,11 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(timeIsRunning)
+        if (timeIsRunning)
         {
-            if(timeRemaining >= 0)
+            if (timeRemaining >= 0)
             {
-                if (timeRemaining >= 480 && timeRemaining <= 1200)
+                if (timeRemaining >= tempoDiApertura && timeRemaining <= tempoDiChiusura)
                 {
                     timeRemaining += Time.deltaTime * velocitaTimerApertura;
                 }
@@ -46,13 +63,31 @@ public class Clock : MonoBehaviour
 
                 DisplayTime(timeRemaining);
 
-                if(timeRemaining >= 1440)
+                if (timeRemaining >= 1440)
                 {
                     timeRemaining = 0;
+                    contatoreGiorni++;
+
+                    if (contatoreGiorni == 5)
+                    {
+                        timeIsRunning = false;
+                        goToEndGameScene();
+                    }
                 }
             }
         }
     }
+
+    public void goToEndGameScene()
+    {
+        PassaggioScene.Instance.StartFadeToOpaque(
+        () =>
+        {
+            SceneManager.LoadScene(2);
+            PassaggioScene.Instance.StartFadeToTransparent();
+        });
+    }
+
     void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;

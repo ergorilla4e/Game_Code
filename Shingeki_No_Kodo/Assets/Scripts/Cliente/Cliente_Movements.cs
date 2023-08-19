@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using TMPro.Examples;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,7 +30,11 @@ public class Cliente_Movements : MonoBehaviour
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
-    
+
+    [SerializeField] private RandomSpawner spawner;
+
+    private GameObject _clientPrefab;
+
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
@@ -39,6 +44,7 @@ public class Cliente_Movements : MonoBehaviour
         neutralIconSprite.SetActive(false);
         angryIconSprite.SetActive(false);
 
+        spawner = FindObjectOfType<RandomSpawner>(true);
     }
 
     void Update()
@@ -50,7 +56,6 @@ public class Cliente_Movements : MonoBehaviour
 
             if (this.transform.position == this.Points[_indexPoint].transform.position)
             {
-                Debug.Log(_indexPoint);
                 this._indexPoint++;
                 _tempoAtteso = 0;
             }
@@ -61,7 +66,6 @@ public class Cliente_Movements : MonoBehaviour
 
             if (this.transform.position == this.Points[_indexPoint - 1].transform.position)
             {
-                Debug.Log(_indexPoint);
                 this._indexPoint--;
             }
 
@@ -70,7 +74,6 @@ public class Cliente_Movements : MonoBehaviour
         if (_indexPoint == Points.Length)
         {
             _tempoAtteso += Time.deltaTime;
-            Debug.Log(_tempoAtteso);
         }
 
         #endregion
@@ -79,8 +82,8 @@ public class Cliente_Movements : MonoBehaviour
         //TODO richeste random di bubbleTea (Switch case + random);
 
         #region DIALOGO_CLIENTE_GIOCATORE
-        
-        if(playerIsCloser)
+
+        if (playerIsCloser)
         {
             chooseIcon();
             balloon.SetActive(true);
@@ -98,20 +101,20 @@ public class Cliente_Movements : MonoBehaviour
 
     public void chooseIcon()
     {
-        if(_tempoAtteso<=3)
+        if (_tempoAtteso <= 7)
         {
             getIconSprite(iconType.happy);
         }
-        else if(_tempoAtteso<=6 && _tempoAtteso>3)
+        else if (_tempoAtteso <= 14 && _tempoAtteso > 7)
         {
             getIconSprite(iconType.neutral);
         }
-        else if(_tempoAtteso>6)
+        else if (_tempoAtteso > 21)
         {
             getIconSprite(iconType.angry);
         }
     }
-    public void getIconSprite (iconType icon)
+    public void getIconSprite(iconType icon)
     {
         switch (icon)
         {
@@ -127,21 +130,65 @@ public class Cliente_Movements : MonoBehaviour
                 break;
         }
     }
-   
+
     public void OnTriggerEnter2D(Collider2D other)
     {
-      if (other.CompareTag ("Player"))
+        if (other.CompareTag("Player"))
         {
             playerIsCloser = true;
+        }
+
+        if (other.CompareTag("Door") && _tempoAtteso > 21)
+        {
+            Debug.Log("E' entratooo...");
+            Destroy(this.transform.parent.gameObject);
         }
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerIsCloser = false;
-           
+
+        }
+    }
+
+    public void OnDestroy()
+    {
+        _clientPrefab = GameObject.Find("Cliente1(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(0);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente2(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(1);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente3(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(2);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente4(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(3);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente5(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(4);
         }
     }
 
