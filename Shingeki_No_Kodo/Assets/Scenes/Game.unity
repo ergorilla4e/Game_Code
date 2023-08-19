@@ -29228,7 +29228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1857138332}
-  timeRemaining: 480
+  timeRemaining: 360
   timeIsRunning: 1
   velocitaTimerApertura: 3
   velocitaTimerChiusura: 10

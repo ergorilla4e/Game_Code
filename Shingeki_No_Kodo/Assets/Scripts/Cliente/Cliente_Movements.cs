@@ -109,7 +109,7 @@ public class Cliente_Movements : MonoBehaviour
         {
             getIconSprite(iconType.neutral);
         }
-        else if (_tempoAtteso > 21)
+        else if (_tempoAtteso > 14)
         {
             getIconSprite(iconType.angry);
         }
