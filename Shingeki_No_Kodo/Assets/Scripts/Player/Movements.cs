@@ -9,7 +9,7 @@ public class Movements : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-   
+
     private void Awake()
     {
         this.rb = GetComponent<Rigidbody2D>();
@@ -18,11 +18,11 @@ public class Movements : MonoBehaviour
 
     private void OnMovement(Vector2 direction)
     {
-         if(direction != Vector2.zero)
+        if (direction != Vector2.zero)
         {
             float length = direction.magnitude;
 
-            if(length > 1 ) 
+            if (length > 1)
             {
                 direction /= length;
             }
@@ -43,12 +43,12 @@ public class Movements : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector2 direction = new Vector2 (h, v);
+        Vector2 direction = new Vector2(h, v);
 
         OnMovement(direction);
 
         this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
-       
+
     }
 
 }
