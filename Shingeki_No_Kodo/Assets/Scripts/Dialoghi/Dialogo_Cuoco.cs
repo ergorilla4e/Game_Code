@@ -36,7 +36,6 @@ public class Dialogo_Cuoco : MonoBehaviour
             }
             else
             {
-                clock.SetTimeIsRunning(true);
                 StopAllCoroutines();
                 textComoponent.text = lines[_index]; 
             }
@@ -58,7 +57,12 @@ public class Dialogo_Cuoco : MonoBehaviour
             }
         }
 
-        if(!playerIsCloser)
+        if(!dialoguePanel.activeSelf)
+        {
+            clock.SetTimeIsRunning(true);
+        }
+
+        if (!playerIsCloser)
         {
             clock.SetTimeIsRunning(true);
             StopAllCoroutines();

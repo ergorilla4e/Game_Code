@@ -2365,6 +2365,7 @@ MonoBehaviour:
   happyIconSprite: {fileID: 1456597674}
   neutralIconSprite: {fileID: 1827293339}
   angryIconSprite: {fileID: 1129910683}
+  clock: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!212 &66265628
 SpriteRenderer:
@@ -4558,6 +4559,7 @@ MonoBehaviour:
   happyIconSprite: {fileID: 838469676}
   neutralIconSprite: {fileID: 580042509}
   angryIconSprite: {fileID: 1043087986}
+  clock: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!95 &764928302
 Animator:
@@ -5753,6 +5755,7 @@ MonoBehaviour:
   happyIconSprite: {fileID: 716352241}
   neutralIconSprite: {fileID: 701930567}
   angryIconSprite: {fileID: 2095585745}
+  clock: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!212 &828593414
 SpriteRenderer:
@@ -23435,6 +23438,7 @@ MonoBehaviour:
   happyIconSprite: {fileID: 359962567}
   neutralIconSprite: {fileID: 2043897586}
   angryIconSprite: {fileID: 2089310620}
+  clock: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!212 &1408455700
 SpriteRenderer:
@@ -28881,6 +28885,7 @@ MonoBehaviour:
   - Sai che puoi interagire con gli oggetti?
   - Prova a premere "Space" vicino alla porta durante l'orario di chiusura.
   speedText: 0.05
+  clock: {fileID: 1857138334}
 --- !u!1 &1840304351
 GameObject:
   m_ObjectHideFlags: 0
@@ -29013,6 +29018,7 @@ MonoBehaviour:
   happyIconSprite: {fileID: 1092098657}
   neutralIconSprite: {fileID: 1698911293}
   angryIconSprite: {fileID: 2125485206}
+  clock: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!212 &1840304358
 SpriteRenderer:

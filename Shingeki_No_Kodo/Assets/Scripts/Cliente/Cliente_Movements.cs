@@ -27,6 +27,7 @@ public class Cliente_Movements : MonoBehaviour
     [SerializeField] private GameObject neutralIconSprite;
     [SerializeField] private GameObject angryIconSprite;
     [SerializeField] private Clock clock;
+
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
@@ -45,6 +46,8 @@ public class Cliente_Movements : MonoBehaviour
         angryIconSprite.SetActive(false);
 
         spawner = FindObjectOfType<RandomSpawner>(true);
+        clock = FindObjectOfType<Clock>(true);
+
     }
 
     void Update()
@@ -84,7 +87,6 @@ public class Cliente_Movements : MonoBehaviour
         else
         {
             this.transform.position = this.transform.position; // setto la posizione del cliente a se stesso, in questo modo sembra che stia fermo 
-            _tempoAtteso = 0;
         }
         
 
@@ -152,7 +154,6 @@ public class Cliente_Movements : MonoBehaviour
 
         if (other.CompareTag("Door") && _tempoAtteso > 21)
         {
-            Debug.Log("E' entratooo...");
             Destroy(this.transform.parent.gameObject);
         }
     }
