@@ -21,34 +21,28 @@ public class RandomSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura())
+            //if (clock.timeIsRunning) //Todo: far funzionare il codice con il timer, se si ferma non entrano i clienti
             {
-                if (_indiciOccupati.Count < 5)
+                if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura())
                 {
-                    int randomIndex = GetRandomAvailableIndex();
-
-                    if (randomIndex != -1)
+                    if (_indiciOccupati.Count < 5)
                     {
-                        Instantiate(clientPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
-                        _indiciOccupati.Add(randomIndex);
+                        int randomIndex = GetRandomAvailableIndex();
+
+                        if (randomIndex != -1)
+                        {
+                            Instantiate(clientPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+                            _indiciOccupati.Add(randomIndex);
+                        }
                     }
                 }
-            }
-            else
-            {
-                _indiciOccupati.Clear();
-            }
-
-            for (int i = 0; i < clientPrefabs.Length; i++)
-            {
-                if (clientPrefabs[i].IsDestroyed())
+                else
                 {
-                    _indiciOccupati.RemoveAt(i);
-                    Debug.Log(_indiciOccupati[i]);
+                    _indiciOccupati.Clear();
                 }
-            }
 
-            yield return new WaitForSeconds(Random.Range(3, 14));
+                yield return new WaitForSeconds(Random.Range(3, 14));
+            }
         }
     }
 

@@ -50,6 +50,9 @@ public class Cliente_Movements : MonoBehaviour
     void Update()
     {
         #region SEGUI_PERCORSO
+
+        //if con orologio se timer fermo
+
         if (_indexPoint < this.Points.Length && _tempoAtteso < Pazienza)
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
@@ -71,6 +74,7 @@ public class Cliente_Movements : MonoBehaviour
 
         }
 
+        //Fermare tempo atteso in contemporanea
         if (_indexPoint == Points.Length)
         {
             _tempoAtteso += Time.deltaTime;
