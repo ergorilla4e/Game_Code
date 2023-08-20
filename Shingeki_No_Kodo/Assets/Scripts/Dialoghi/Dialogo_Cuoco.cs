@@ -14,6 +14,8 @@ public class Dialogo_Cuoco : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComoponent;
     [SerializeField] private string[] lines;
     [SerializeField] private float speedText;
+    [SerializeField] private Clock clock;
+
 
     private int _index;
     private bool playerIsCloser;
@@ -34,7 +36,7 @@ public class Dialogo_Cuoco : MonoBehaviour
             }
             else
             {
-                //timeIsRemain true
+                clock.SetTimeIsRunning(true);
                 StopAllCoroutines();
                 textComoponent.text = lines[_index]; 
             }
@@ -49,7 +51,7 @@ public class Dialogo_Cuoco : MonoBehaviour
             }
             else
             {
-                //timeIsRemain false
+                clock.SetTimeIsRunning(false);
                 dialogueSprite.SetActive(false);
                 dialoguePanel.SetActive(true);
                 StartDialog();
@@ -58,7 +60,7 @@ public class Dialogo_Cuoco : MonoBehaviour
 
         if(!playerIsCloser)
         {
-            //timeIsRemain true
+            clock.SetTimeIsRunning(true);
             StopAllCoroutines();
             textComoponent.text = string.Empty;
             dialoguePanel.SetActive(false);

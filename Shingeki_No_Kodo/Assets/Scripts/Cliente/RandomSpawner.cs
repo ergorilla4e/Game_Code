@@ -21,7 +21,7 @@ public class RandomSpawner : MonoBehaviour
     {
         while (true)
         {
-            //if (clock.timeIsRunning) //Todo: far funzionare il codice con il timer, se si ferma non entrano i clienti
+            if (clock.GetTimeIsRunning()) //Todo: far funzionare il codice con il timer, se si ferma non entrano i clienti
             {
                 if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura())
                 {
@@ -42,6 +42,10 @@ public class RandomSpawner : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(Random.Range(3, 14));
+            }
+            else
+            {
+                yield return null; //metto in pausa lo spawn dei clienti
             }
         }
     }

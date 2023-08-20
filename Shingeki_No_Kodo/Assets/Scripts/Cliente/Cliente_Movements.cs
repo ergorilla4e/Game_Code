@@ -26,7 +26,7 @@ public class Cliente_Movements : MonoBehaviour
     [SerializeField] private GameObject happyIconSprite;
     [SerializeField] private GameObject neutralIconSprite;
     [SerializeField] private GameObject angryIconSprite;
-
+    [SerializeField] private Clock clock;
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
@@ -52,33 +52,41 @@ public class Cliente_Movements : MonoBehaviour
         #region SEGUI_PERCORSO
 
         //if con orologio se timer fermo
-
-        if (_indexPoint < this.Points.Length && _tempoAtteso < Pazienza)
+        
+        if (clock.GetTimeIsRunning())
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
-
-            if (this.transform.position == this.Points[_indexPoint].transform.position)
+            if (_indexPoint < this.Points.Length && _tempoAtteso < Pazienza)
             {
-                this._indexPoint++;
-                _tempoAtteso = 0;
+                this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
+
+                if (this.transform.position == this.Points[_indexPoint].transform.position)
+                {
+                    this._indexPoint++;
+                    _tempoAtteso = 0;
+                }
+            }
+            else if (_indexPoint > 0 && _tempoAtteso >= Pazienza)
+            {
+                this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint - 1].transform.position, this.MoveSpeed * Time.deltaTime);
+
+                if (this.transform.position == this.Points[_indexPoint - 1].transform.position)
+                {
+                    this._indexPoint--;
+                }
+
+            }
+
+            if (_indexPoint == Points.Length)
+            {
+                _tempoAtteso += Time.deltaTime;
             }
         }
-        else if (_indexPoint > 0 && _tempoAtteso >= Pazienza)
+        else
         {
-            this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint - 1].transform.position, this.MoveSpeed * Time.deltaTime);
-
-            if (this.transform.position == this.Points[_indexPoint - 1].transform.position)
-            {
-                this._indexPoint--;
-            }
-
+            this.transform.position = this.transform.position; // setto la posizione del cliente a se stesso, in questo modo sembra che stia fermo 
+            _tempoAtteso = 0;
         }
-
-        //Fermare tempo atteso in contemporanea
-        if (_indexPoint == Points.Length)
-        {
-            _tempoAtteso += Time.deltaTime;
-        }
+        
 
         #endregion
 

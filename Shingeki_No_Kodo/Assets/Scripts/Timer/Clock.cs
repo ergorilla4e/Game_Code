@@ -25,6 +25,7 @@ public class Clock : MonoBehaviour
         contatoreGiorni = 0;
     }
 
+    
     public int GetTempoDiApertura()
     {
         return tempoDiApertura;
@@ -45,6 +46,14 @@ public class Clock : MonoBehaviour
         this.timeRemaining = timeRemaining;
     }
 
+    public bool GetTimeIsRunning ()
+    {
+        return timeIsRunning;
+    }
+    public void SetTimeIsRunning( bool timeIsRunning)
+    {
+        this.timeIsRunning = timeIsRunning;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
