@@ -16,59 +16,162 @@ public class Dialogo_Cuoco : MonoBehaviour
     [SerializeField] private float speedText;
     [SerializeField] private Clock clock;
 
+    [SerializeField] private bool firstInteraction;
+    [SerializeField] private GameObject windowPanel;
+    [SerializeField] private GameObject[] bubbleTeaPrefab;
+
+    //[SerializeField] private GameObject[] buttonsBBT;
+
+    private int bubbleTeaScelto = 0;
 
     private int _index;
     private bool playerIsCloser;
+
+    private int numeroDialogo;
 
     private void Start()
     {
         textComoponent.text = string.Empty;
         dialogueSprite.SetActive(true);
+        firstInteraction = true;
+        numeroDialogo = 0;
+
+        //foreach (GameObject buttonObject in buttonsBBT)
+        //{
+        //    UnityEngine.UI.Button button = buttonObject.GetComponent<UnityEngine.UI.Button>();
+        //    if (button != null)
+        //    {
+        //        button.onClick.AddListener(() => OnButtonClick(buttonObject));
+        //    }
+        //}
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && playerIsCloser)
+        if (firstInteraction)
         {
-            if(textComoponent.text == lines[_index])
+            if (Input.GetMouseButtonDown(0) && playerIsCloser)
             {
-                NextLine();
+                if (textComoponent.text == lines[_index])
+                {
+                    NextLine();
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    textComoponent.text = lines[_index];
+                }
             }
-            else
+
+            if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser)
             {
+                if (dialoguePanel.activeInHierarchy)
+                {
+                    StopAllCoroutines();
+                    textComoponent.text = lines[_index];
+                }
+                else
+                {
+                    clock.SetTimeIsRunning(false);
+                    dialogueSprite.SetActive(false);
+                    dialoguePanel.SetActive(true);
+                    StartDialog();
+                }
+            }
+
+            if (!dialoguePanel.activeSelf)
+            {
+                clock.SetTimeIsRunning(true);
+            }
+
+            if (!playerIsCloser)
+            {
+                clock.SetTimeIsRunning(true);
                 StopAllCoroutines();
-                textComoponent.text = lines[_index]; 
+                textComoponent.text = string.Empty;
+                dialoguePanel.SetActive(false);
             }
-        }
 
-        if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser)
-        {
-            if (dialoguePanel.activeInHierarchy)
+            if (numeroDialogo == 2 && !dialoguePanel.activeSelf)
             {
-                StopAllCoroutines();
-                textComoponent.text = lines[_index];
+                firstInteraction = false;
             }
-            else
+
+        }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser)
             {
-                clock.SetTimeIsRunning(false);
-                dialogueSprite.SetActive(false);
-                dialoguePanel.SetActive(true);
-                StartDialog();
+                windowPanel.SetActive(true);
             }
         }
 
-        if(!dialoguePanel.activeSelf)
-        {
-            clock.SetTimeIsRunning(true);
-        }
+    }
 
-        if (!playerIsCloser)
+    private void ChoseBBT()
+    {
+        StartCoroutine(IstantiateAfterSeconds(bubbleTeaScelto));
+    }
+
+    public void OnButtonClick(GameObject clickedButtonObject)
+    {
+        if (clickedButtonObject.name == "Bubble tea fine_0")
         {
-            clock.SetTimeIsRunning(true);
-            StopAllCoroutines();
-            textComoponent.text = string.Empty;
-            dialoguePanel.SetActive(false);
+            bubbleTeaScelto = 0;
+            ChoseBBT();
         }
+        else if (clickedButtonObject.name == "Bubble tea fine_1")
+        {
+            bubbleTeaScelto = 1;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_2")
+        {
+            bubbleTeaScelto = 2; 
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_3")
+        {
+            bubbleTeaScelto = 3;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_4")
+        {
+            bubbleTeaScelto = 4;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_5")
+        {
+            bubbleTeaScelto = 5;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_6")
+        {
+            bubbleTeaScelto = 6;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_7")
+        {
+            bubbleTeaScelto = 7;
+            ChoseBBT();
+        }
+        else if (clickedButtonObject.name == "Bubble tea fine_8")
+        {
+            bubbleTeaScelto = 8;
+            ChoseBBT();
+        }
+        else
+        {
+            bubbleTeaScelto = 9;
+            ChoseBBT();
+        }
+    }
+
+    IEnumerator IstantiateAfterSeconds(int bubbleTeaScelto)
+    {
+        yield return new WaitForSeconds(0);
+
+        Instantiate(bubbleTeaPrefab[bubbleTeaScelto], new Vector3(-7.5f, -7.6f, 0f), Quaternion.identity);
     }
 
     public void StartDialog()
@@ -91,6 +194,7 @@ public class Dialogo_Cuoco : MonoBehaviour
     {
         if (_index < lines.Length - 1)
         {
+            numeroDialogo++;
             _index++;
             textComoponent.text = string.Empty;
             StartCoroutine(TypeLine());
