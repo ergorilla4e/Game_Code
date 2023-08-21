@@ -2367,6 +2367,7 @@ MonoBehaviour:
   angryIconSprite: {fileID: 1129910683}
   clock: {fileID: 0}
   spawner: {fileID: 0}
+  _BubbleTea_n: []
 --- !u!212 &66265628
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4561,6 +4562,7 @@ MonoBehaviour:
   angryIconSprite: {fileID: 1043087986}
   clock: {fileID: 0}
   spawner: {fileID: 0}
+  _BubbleTea_n: []
 --- !u!95 &764928302
 Animator:
   serializedVersion: 5
@@ -5757,6 +5759,7 @@ MonoBehaviour:
   angryIconSprite: {fileID: 2095585745}
   clock: {fileID: 0}
   spawner: {fileID: 0}
+  _BubbleTea_n: []
 --- !u!212 &828593414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23440,6 +23443,7 @@ MonoBehaviour:
   angryIconSprite: {fileID: 2089310620}
   clock: {fileID: 0}
   spawner: {fileID: 0}
+  _BubbleTea_n: []
 --- !u!212 &1408455700
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29020,6 +29024,7 @@ MonoBehaviour:
   angryIconSprite: {fileID: 2125485206}
   clock: {fileID: 0}
   spawner: {fileID: 0}
+  _BubbleTea_n: []
 --- !u!212 &1840304358
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29221,7 +29226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1857138332}
-  timeRemaining: 360
+  timeRemaining: 480
   timeIsRunning: 1
   velocitaTimerApertura: 3
   velocitaTimerChiusura: 10

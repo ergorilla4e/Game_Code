@@ -36,6 +36,12 @@ public class Cliente_Movements : MonoBehaviour
 
     private GameObject _clientPrefab;
 
+    [SerializeField] private GameObject[] _BubbleTea_n;
+    private int bubbleTeaScelto;
+
+    private bool keyIsPressed = false;
+
+    private int paga;
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
@@ -45,9 +51,18 @@ public class Cliente_Movements : MonoBehaviour
         neutralIconSprite.SetActive(false);
         angryIconSprite.SetActive(false);
 
+        bubbleTeaScelto = RandomBubbleTea();
+
         spawner = FindObjectOfType<RandomSpawner>(true);
         clock = FindObjectOfType<Clock>(true);
 
+        for (int i = 0; i < _BubbleTea_n.Length; i++)
+        {
+
+            _BubbleTea_n[i].SetActive(false);
+
+        }
+        paga = 9;
     }
 
     void Update()
@@ -55,7 +70,7 @@ public class Cliente_Movements : MonoBehaviour
         #region SEGUI_PERCORSO
 
         //if con orologio se timer fermo
-        
+
         if (clock.GetTimeIsRunning())
         {
             if (_indexPoint < this.Points.Length && _tempoAtteso < Pazienza)
@@ -88,27 +103,48 @@ public class Cliente_Movements : MonoBehaviour
         {
             this.transform.position = this.transform.position; // setto la posizione del cliente a se stesso, in questo modo sembra che stia fermo 
         }
-        
+
 
         #endregion
 
 
-        //TODO richeste random di bubbleTea (Switch case + random);
+
 
         #region DIALOGO_CLIENTE_GIOCATORE
 
-        if (playerIsCloser)
+        if (playerIsCloser && !keyIsPressed)
         {
             chooseIcon();
             balloon.SetActive(true);
+
+
+
         }
-        else
+        else if (!playerIsCloser)
         {
+            keyIsPressed = false;
+
             balloon.SetActive(false);
             happyIconSprite.SetActive(false);
             neutralIconSprite.SetActive(false);
             angryIconSprite.SetActive(false);
+            _BubbleTea_n[bubbleTeaScelto].SetActive(false);
         }
+
+        if (playerIsCloser && Input.GetKey(KeyCode.Space))
+        {
+            keyIsPressed = true;
+            paga = Pagamento(paga);
+            Debug.Log(paga);
+            balloon.SetActive(true);
+            _BubbleTea_n[bubbleTeaScelto].SetActive(true);
+
+            happyIconSprite.SetActive(false);
+            neutralIconSprite.SetActive(false);
+            angryIconSprite.SetActive(false);
+
+        }
+
         #endregion
 
     }
@@ -205,4 +241,26 @@ public class Cliente_Movements : MonoBehaviour
         }
     }
 
+    public int RandomBubbleTea()
+    {
+        return UnityEngine.Random.Range(0, _BubbleTea_n.Length);
+    }
+
+    public int Pagamento(int paga)
+    {
+        if (_tempoAtteso <= 7)
+        {
+            return paga = 9;
+        }
+        else if (_tempoAtteso <= 14 && _tempoAtteso > 7)
+        {
+            return paga = 6;
+        }
+        else
+        {
+            return paga = 3;
+        }
+
+    }
 }
+
