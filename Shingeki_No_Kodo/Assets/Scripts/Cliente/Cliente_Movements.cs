@@ -42,6 +42,11 @@ public class Cliente_Movements : MonoBehaviour
     private bool keyIsPressed = false;
 
     private int paga;
+
+    [SerializeField] private Slot slotReference;
+
+    public event Action<GameObject> ItemDropped;
+
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
@@ -62,7 +67,19 @@ public class Cliente_Movements : MonoBehaviour
             _BubbleTea_n[i].SetActive(false);
 
         }
+
+        //Debug.Log(_BubbleTea_n[bubbleTeaScelto].name);
+
+        Inventory inventory = FindObjectOfType<Inventory>(true);
+
+        //foreach (Slot slot in inventory.allSlots)
+        //{
+        //    slot.ItemDropped += OnItemDropped;
+        //}
         paga = 9;
+
+        slotReference = FindObjectOfType<Slot>(true);
+
     }
 
     void Update()
@@ -134,14 +151,15 @@ public class Cliente_Movements : MonoBehaviour
         if (playerIsCloser && Input.GetKey(KeyCode.Space))
         {
             keyIsPressed = true;
-            paga = Pagamento(paga);
-            Debug.Log(paga);
+           // paga = Pagamento();
+           // Debug.Log(paga); //sostituirlo con le monete
             balloon.SetActive(true);
             _BubbleTea_n[bubbleTeaScelto].SetActive(true);
 
             happyIconSprite.SetActive(false);
             neutralIconSprite.SetActive(false);
             angryIconSprite.SetActive(false);
+            // slotReference.DropItem();
 
         }
 
@@ -246,8 +264,9 @@ public class Cliente_Movements : MonoBehaviour
         return UnityEngine.Random.Range(0, _BubbleTea_n.Length);
     }
 
-    public int Pagamento(int paga)
+    public int Pagamento()
     {
+
         if (_tempoAtteso <= 7)
         {
             return paga = 9;
@@ -260,6 +279,51 @@ public class Cliente_Movements : MonoBehaviour
         {
             return paga = 3;
         }
+
+
+
+
+    }
+
+    public GameObject GetBubbleTea()
+    {
+        return _BubbleTea_n[bubbleTeaScelto];
+    }
+    public void OnItemDropped(GameObject item)
+    {
+        //Da riprendere:
+        string bubbleTeaName = _BubbleTea_n[bubbleTeaScelto].name;
+        bubbleTeaName = bubbleTeaName.Replace("(Clone)", "");
+
+        string itemName = item.name;
+        itemName = itemName.Replace("(Clone)", "");
+
+        Debug.Log("BubbleMIO: " + itemName);
+        Debug.Log("BubbleCLIENTE: " + bubbleTeaName);
+
+
+        // Confronta l'oggetto dell'inventario con quello richiesto dal cliente
+        if (itemName == bubbleTeaName)
+        {
+            // Transazione riuscita, assegna le monete e gestisci l'oggetto consegnato
+            paga = Pagamento();
+            Debug.Log(paga);
+            _BubbleTea_n[bubbleTeaScelto].SetActive(true);
+
+            happyIconSprite.SetActive(false);
+            neutralIconSprite.SetActive(false);
+            angryIconSprite.SetActive(false);
+
+            Debug.Log("Transazione RIUSCITA");
+
+        }
+        else
+        {
+            // Transazione fallita, gestisci di conseguenza
+            Debug.Log("Transazione fallita");
+            // Esempio: Sottrai monete o esegui altre azioni
+        }
+        GameObject.Destroy(item);
 
     }
 }

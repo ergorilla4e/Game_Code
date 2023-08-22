@@ -115,47 +115,47 @@ public class Dialogo_Cuoco : MonoBehaviour
 
     public void OnButtonClick(GameObject clickedButtonObject)
     {
-        if (clickedButtonObject.name == "Bubble tea fine_0")
+        if (clickedButtonObject.name == "BubbleTea1")
         {
             bubbleTeaScelto = 0;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_1")
+        else if (clickedButtonObject.name == "BubbleTea2")
         {
             bubbleTeaScelto = 1;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_2")
+        else if (clickedButtonObject.name == "BubbleTea3")
         {
             bubbleTeaScelto = 2; 
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_3")
+        else if (clickedButtonObject.name == "BubbleTea4")
         {
             bubbleTeaScelto = 3;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_4")
+        else if (clickedButtonObject.name == "BubbleTea5")
         {
             bubbleTeaScelto = 4;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_5")
+        else if (clickedButtonObject.name == "BubbleTea6")
         {
             bubbleTeaScelto = 5;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_6")
+        else if (clickedButtonObject.name == "BubbleTea7")
         {
             bubbleTeaScelto = 6;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_7")
+        else if (clickedButtonObject.name == "BubbleTea8")
         {
             bubbleTeaScelto = 7;
             ChoseBBT();
         }
-        else if (clickedButtonObject.name == "Bubble tea fine_8")
+        else if (clickedButtonObject.name == "BubbleTea9")
         {
             bubbleTeaScelto = 8;
             ChoseBBT();
