@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2269172563553914}
   - component: {fileID: 2035960100045994768}
-  - component: {fileID: 5949807839894414617}
   - component: {fileID: -4690288200419473547}
+  - component: {fileID: 6276580007176434562}
   m_Layer: 0
   m_Name: BubbleTea9
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5949807839894414617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949484391689663295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0c8b8c88fdc99146b08d1790b82f2e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemButton: {fileID: 7522955994949279544, guid: 59e8ce61c857cac4a9506a245a49a048, type: 3}
 --- !u!70 &-4690288200419473547
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,3 +102,17 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &6276580007176434562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949484391689663295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c8b8c88fdc99146b08d1790b82f2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    name: BubbleTea9

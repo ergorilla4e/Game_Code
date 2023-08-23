@@ -6,6 +6,9 @@ TagManager:
   tags:
   - NPC
   - Door
+  - Slot1
+  - Slot2
+  - Slot3
   layers:
   - Default
   - TransparentFX

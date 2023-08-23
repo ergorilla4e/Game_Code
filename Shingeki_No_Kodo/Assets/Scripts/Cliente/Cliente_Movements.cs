@@ -7,6 +7,7 @@ using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cliente_Movements : MonoBehaviour
 {
@@ -41,11 +42,11 @@ public class Cliente_Movements : MonoBehaviour
 
     private bool keyIsPressed = false;
 
+    private GameObject currentCustomer;
+
     private int paga;
 
-    [SerializeField] private Slot slotReference;
-
-    public event Action<GameObject> ItemDropped;
+    private bool consegnaBBT = false;
 
     private void Start()
     {
@@ -63,22 +64,26 @@ public class Cliente_Movements : MonoBehaviour
 
         for (int i = 0; i < _BubbleTea_n.Length; i++)
         {
-
             _BubbleTea_n[i].SetActive(false);
-
         }
 
         //Debug.Log(_BubbleTea_n[bubbleTeaScelto].name);
 
-        Inventory inventory = FindObjectOfType<Inventory>(true);
+       // playerInventory = FindObjectOfType<Inventory>(true);
 
         //foreach (Slot slot in inventory.allSlots)
         //{
         //    slot.ItemDropped += OnItemDropped;
         //}
+
         paga = 9;
 
-        slotReference = FindObjectOfType<Slot>(true);
+        //Slot slotReference = FindFirstObjectByType<Slot>(); 
+
+        //if (slotReference != null)
+        //{
+        //    slotReference.ItemDropped += OnBubbleTeaButtonPressed;
+        //}
 
     }
 
@@ -129,15 +134,12 @@ public class Cliente_Movements : MonoBehaviour
 
         #region DIALOGO_CLIENTE_GIOCATORE
 
-        if (playerIsCloser && !keyIsPressed)
+        if (playerIsCloser && !keyIsPressed && !consegnaBBT)
         {
             chooseIcon();
             balloon.SetActive(true);
-
-
-
         }
-        else if (!playerIsCloser)
+        else if (!playerIsCloser && !consegnaBBT)
         {
             keyIsPressed = false;
 
@@ -148,21 +150,38 @@ public class Cliente_Movements : MonoBehaviour
             _BubbleTea_n[bubbleTeaScelto].SetActive(false);
         }
 
-        if (playerIsCloser && Input.GetKey(KeyCode.Space))
+        if (playerIsCloser && Input.GetKeyDown(KeyCode.Space))
         {
             keyIsPressed = true;
-           // paga = Pagamento();
-           // Debug.Log(paga); //sostituirlo con le monete
             balloon.SetActive(true);
             _BubbleTea_n[bubbleTeaScelto].SetActive(true);
 
             happyIconSprite.SetActive(false);
             neutralIconSprite.SetActive(false);
             angryIconSprite.SetActive(false);
-            // slotReference.DropItem();
-
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (playerIsCloser && !consegnaBBT)
+            {
+                consegnaBBT = OnBubbleTeaButtonPressed(GetBubbleTea());
+
+                if (consegnaBBT)
+                {
+                    balloon.SetActive(true);
+                    _BubbleTea_n[bubbleTeaScelto].SetActive(true);
+
+                    happyIconSprite.SetActive(false);
+                    neutralIconSprite.SetActive(false);
+                    angryIconSprite.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("Non hai l'oggetto nell'inventario");
+                }
+            }
+        }
         #endregion
 
     }
@@ -204,6 +223,7 @@ public class Cliente_Movements : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsCloser = true;
+            currentCustomer = this.gameObject;
         }
 
         if (other.CompareTag("Door") && _tempoAtteso > 21)
@@ -217,7 +237,7 @@ public class Cliente_Movements : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsCloser = false;
-
+            currentCustomer = null;
         }
     }
 
@@ -265,8 +285,7 @@ public class Cliente_Movements : MonoBehaviour
     }
 
     public int Pagamento()
-    {
-
+    { 
         if (_tempoAtteso <= 7)
         {
             return paga = 9;
@@ -279,52 +298,39 @@ public class Cliente_Movements : MonoBehaviour
         {
             return paga = 3;
         }
+    }
 
+    public bool OnBubbleTeaButtonPressed(GameObject BBT_Cliente)
+    {
+        Debug.Log("Sto dando il BBT");
 
+        for(int i = 0; i < Inventory.Instance.items.Count; i++)
+        {
+            if (Inventory.Instance.items[i].name == BBT_Cliente.name)
+            {
+                Inventory.Instance.RemoveItem(Inventory.Instance.items[i]);
 
+                paga = Pagamento();
+                Debug.Log(paga);
+                _BubbleTea_n[bubbleTeaScelto].SetActive(false);
 
+                happyIconSprite.SetActive(false);
+                neutralIconSprite.SetActive(false);
+                angryIconSprite.SetActive(false);
+
+                Debug.Log("Transazione RIUSCITA");
+                return true;
+            }
+          
+        }
+        return false;
+       
     }
 
     public GameObject GetBubbleTea()
     {
         return _BubbleTea_n[bubbleTeaScelto];
     }
-    public void OnItemDropped(GameObject item)
-    {
-        //Da riprendere:
-        string bubbleTeaName = _BubbleTea_n[bubbleTeaScelto].name;
-        bubbleTeaName = bubbleTeaName.Replace("(Clone)", "");
 
-        string itemName = item.name;
-        itemName = itemName.Replace("(Clone)", "");
-
-        Debug.Log("BubbleMIO: " + itemName);
-        Debug.Log("BubbleCLIENTE: " + bubbleTeaName);
-
-
-        // Confronta l'oggetto dell'inventario con quello richiesto dal cliente
-        if (itemName == bubbleTeaName)
-        {
-            // Transazione riuscita, assegna le monete e gestisci l'oggetto consegnato
-            paga = Pagamento();
-            Debug.Log(paga);
-            _BubbleTea_n[bubbleTeaScelto].SetActive(true);
-
-            happyIconSprite.SetActive(false);
-            neutralIconSprite.SetActive(false);
-            angryIconSprite.SetActive(false);
-
-            Debug.Log("Transazione RIUSCITA");
-
-        }
-        else
-        {
-            // Transazione fallita, gestisci di conseguenza
-            Debug.Log("Transazione fallita");
-            // Esempio: Sottrai monete o esegui altre azioni
-        }
-        GameObject.Destroy(item);
-
-    }
 }
 

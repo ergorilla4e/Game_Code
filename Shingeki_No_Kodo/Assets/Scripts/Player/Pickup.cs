@@ -1,36 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Pickup : MonoBehaviour
+public class PickUp : MonoBehaviour
 {
-    private Inventory inventory;
-    public GameObject itemButton;
+    [SerializeField] private Dialogo_Cuoco cuoco;
 
-
-    private void Start()
-    {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-
-
-    }
+    public Item item = new Item("");
+    private bool added = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            for (int i = 0; i < inventory.slots.Length; i++)
+            added = Inventory.Instance.AddItem(item.name);
+
+            if (added)
             {
-                if (inventory.isFull[i] == false)
-                {
-                    inventory.isFull[i] = true;
-                    Instantiate(itemButton, inventory.slots[i].transform);
-                    Destroy(gameObject);
-                    break;
-                }
+                Destroy(gameObject);
             }
         }
     }
+
 
 }

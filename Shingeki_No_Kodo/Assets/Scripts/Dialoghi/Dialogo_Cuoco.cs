@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,7 +21,7 @@ public class Dialogo_Cuoco : MonoBehaviour
     [SerializeField] private GameObject windowPanel;
     [SerializeField] private GameObject[] bubbleTeaPrefab;
 
-    //[SerializeField] private GameObject[] buttonsBBT;
+    [SerializeField] Transform[] spawnPoints; 
 
     private int bubbleTeaScelto = 0;
 
@@ -29,21 +30,18 @@ public class Dialogo_Cuoco : MonoBehaviour
 
     private int numeroDialogo;
 
+    private bool[] isPositionOccupied;
+
+    private int countPositionOccupied = 0;
+
     private void Start()
     {
         textComoponent.text = string.Empty;
         dialogueSprite.SetActive(true);
         firstInteraction = true;
         numeroDialogo = 0;
+        isPositionOccupied = new bool[spawnPoints.Length];
 
-        //foreach (GameObject buttonObject in buttonsBBT)
-        //{
-        //    UnityEngine.UI.Button button = buttonObject.GetComponent<UnityEngine.UI.Button>();
-        //    if (button != null)
-        //    {
-        //        button.onClick.AddListener(() => OnButtonClick(buttonObject));
-        //    }
-        //}
     }
 
     private void Update()
@@ -100,12 +98,25 @@ public class Dialogo_Cuoco : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser)
+            if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser && countPositionOccupied < 5)
             {
                 windowPanel.SetActive(true);
             }
         }
 
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (isPositionOccupied[i])
+            {
+                // Verifica se l'oggetto istanziato è null
+                if (spawnPoints[i].childCount == 0)
+                {
+                    countPositionOccupied--;
+                    ResetPosition(i); // Imposta la posizione come non occupata
+                }
+            }
+        }
     }
 
     private void ChoseBBT()
@@ -169,9 +180,24 @@ public class Dialogo_Cuoco : MonoBehaviour
 
     IEnumerator IstantiateAfterSeconds(int bubbleTeaScelto)
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(1);
 
-        Instantiate(bubbleTeaPrefab[bubbleTeaScelto], new Vector3(-7.5f, -7.6f, 0f), Quaternion.identity);
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (!isPositionOccupied[i])
+            {
+                countPositionOccupied++;
+                GameObject bubbleTeaInstance = Instantiate(bubbleTeaPrefab[bubbleTeaScelto], spawnPoints[i].position, Quaternion.identity);
+                bubbleTeaInstance.transform.parent = spawnPoints[i]; // Imposta il punto di spawn come genitore dell'istanza Bubble Tea
+                isPositionOccupied[i] = true;
+                break;
+            }
+        }
+    }
+
+    public void ResetPosition(int index)
+    {
+        isPositionOccupied[index] = false;
     }
 
     public void StartDialog()
