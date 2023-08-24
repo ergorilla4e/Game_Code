@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class Pickedup : MonoBehaviour
 {
-    [SerializeField] private Dialogo_Cuoco cuoco;
 
     public Item item = new Item("");
     private bool added = false;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8528019515759774620}
   - component: {fileID: 4746212227323077410}
   - component: {fileID: 1982081183456960954}
-  - component: {fileID: 2336170322432340460}
+  - component: {fileID: 4432659604812149814}
   m_Layer: 0
   m_Name: BubbleTea8
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 10
   m_Sprite: {fileID: -166613382, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,7 +102,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &2336170322432340460
+--- !u!114 &4432659604812149814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5034682081141101300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0c8b8c88fdc99146b08d1790b82f2e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 05126294c9be0934f940e8597bb5d7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item:
