@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5837546977101030977}
   - component: {fileID: 3967968747883718729}
-  - component: {fileID: 6078707245307701813}
   - component: {fileID: 5362224908639724664}
+  - component: {fileID: 7396280504690772540}
   m_Layer: 0
   m_Name: BubbleTea5
   m_TagString: Untagged
@@ -86,22 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &6078707245307701813
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459272151420768916}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!114 &5362224908639724664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,3 +100,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     name: BubbleTea5
+--- !u!70 &7396280504690772540
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459272151420768916}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.99999994, y: 1.9999999}
+  m_Direction: 0
