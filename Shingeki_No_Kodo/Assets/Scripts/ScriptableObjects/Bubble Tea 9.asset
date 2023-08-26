@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di pesca
   basecost: 3
   spriteIcon: {fileID: -851252519, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 1949484391689663295, guid: 74b8f1cdeb55a2246b971c6155bddb9c, type: 3}

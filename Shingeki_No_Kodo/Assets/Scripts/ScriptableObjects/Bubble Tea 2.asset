@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di matcha
   basecost: 3
   spriteIcon: {fileID: -933294120, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 1672197540192369501, guid: f473ecacba9dec441912540738fe4d7a, type: 3}

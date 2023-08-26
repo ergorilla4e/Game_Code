@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di amore
   basecost: 3
   spriteIcon: {fileID: -118307611, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 6055069176628257435, guid: 81141dedc9963ef48825b610bb4da33e, type: 3}

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di caffe'
   basecost: 3
   spriteIcon: {fileID: -716150040, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 3459272151420768916, guid: 8c673420ff1205445b0aedcf6c06e9ad, type: 3}

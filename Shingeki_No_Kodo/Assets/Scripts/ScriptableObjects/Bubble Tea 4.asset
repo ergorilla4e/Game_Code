@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di mirtilli
   basecost: 3
   spriteIcon: {fileID: 721347672, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 2737672166966150355, guid: 418c97b6d2861194a9024109a9dc0e18, type: 3}

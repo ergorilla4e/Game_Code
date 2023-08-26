@@ -29,6 +29,8 @@ public class Cliente_Movements : MonoBehaviour
     [SerializeField] private GameObject angryIconSprite;
     [SerializeField] private Clock clock;
 
+    [SerializeField] private ShopManager shopManager;
+
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
@@ -59,29 +61,14 @@ public class Cliente_Movements : MonoBehaviour
 
         spawner = FindObjectOfType<RandomSpawner>(true);
         clock = FindObjectOfType<Clock>(true);
+        shopManager = FindObjectOfType<ShopManager>(true);
 
         for (int i = 0; i < _BubbleTea_n.Length; i++)
         {
             _BubbleTea_n[i].SetActive(false);
         }
 
-        //Debug.Log(_BubbleTea_n[bubbleTeaScelto].name);
-
-       // playerInventory = FindObjectOfType<Inventory>(true);
-
-        //foreach (Slot slot in inventory.allSlots)
-        //{
-        //    slot.ItemDropped += OnItemDropped;
-        //}
-
-        paga = 9;
-
-        //Slot slotReference = FindFirstObjectByType<Slot>(); 
-
-        //if (slotReference != null)
-        //{
-        //    slotReference.ItemDropped += OnBubbleTeaButtonPressed;
-        //}
+        this.paga = 9;
 
     }
 
@@ -307,7 +294,9 @@ public class Cliente_Movements : MonoBehaviour
                 Inventory.Instance.RemoveItem(Inventory.Instance.items[i]);
 
                 paga = Pagamento();
-                Debug.Log(paga);
+
+                shopManager.Coins += paga;
+
                 _BubbleTea_n[bubbleTeaScelto].SetActive(false);
 
                 happyIconSprite.SetActive(false);

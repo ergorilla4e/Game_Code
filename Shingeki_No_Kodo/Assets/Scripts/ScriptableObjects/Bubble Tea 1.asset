@@ -16,3 +16,4 @@ MonoBehaviour:
   description: 'Bubble tea al sapore di fragola '
   basecost: 3
   spriteIcon: {fileID: 124487235, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 613574442344414105, guid: 82a63fc5cf7109f408a68f9ff5e1d707, type: 3}

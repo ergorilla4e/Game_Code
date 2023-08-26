@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.Arm;
 
 public class Movements : MonoBehaviour
 {
@@ -14,13 +13,8 @@ public class Movements : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    
-    
     private bool _interactiveWindow = false; // stato se può interagire con la finestra
     [SerializeField] private GameObject Canvas;
-
-
-
 
     private void Awake()
     {
@@ -85,7 +79,6 @@ public class Movements : MonoBehaviour
         OnMovement(direction);
 
         this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
-
 
     }
 

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea ghiacciato super rinfrescante
   basecost: 3
   spriteIcon: {fileID: -1422357561, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 3440274181931956030, guid: a82aef0e67aaf404d8902b498621efac, type: 3}

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di menta
   basecost: 3
   spriteIcon: {fileID: 1192051726, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 3798586975703440882, guid: 8ac482ed06a38cd4e8f916dc784dc8d2, type: 3}

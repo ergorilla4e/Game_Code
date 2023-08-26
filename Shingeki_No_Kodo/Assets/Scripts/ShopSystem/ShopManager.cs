@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Diagnostics.CodeAnalysis;
 
 public class ShopManager : MonoBehaviour
 
@@ -13,6 +14,7 @@ public class ShopManager : MonoBehaviour
     public ShopTemplate[] ShopPanels;
     public GameObject[] ShopPanelGO;
     public Button[] myPurchase;
+
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject cuoco;
@@ -32,6 +34,8 @@ public class ShopManager : MonoBehaviour
         
         movementsPlayer = player.GetComponent<Movements>();
         dialogoCuoco = cuoco.GetComponent<Dialogo_Cuoco>();
+
+        this.Coins = 15;
     }
 
 
@@ -51,11 +55,17 @@ public class ShopManager : MonoBehaviour
         if (Coins >= ShopItemSO[btnNo].basecost)
         {
             Coins = (int)(Coins - ShopItemSO[btnNo].basecost);
-            CoinUI.text = "Coins:" + Coins.ToString();
 
             AcquistaOggetto(btnNo);
         }
 
+    }
+
+    public void inserisciInCuoco(int indirizzo)
+    {
+        dialogoCuoco.arrayOfBubbleTea[indirizzo-1]++;
+        ShopPanels[indirizzo].possedutiText.text = "Posseduti:" + dialogoCuoco.arrayOfBubbleTea[indirizzo - 1];
+        dialogoCuoco.nuemeroBBTPosseduti[indirizzo-1].text = "" + dialogoCuoco.arrayOfBubbleTea[indirizzo - 1];
     }
 
     public void AcquistaOggetto(int btnNo)
@@ -68,33 +78,43 @@ public class ShopManager : MonoBehaviour
                 break;
 
             case 1:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 2:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 3:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 4:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 5:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 6:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 7:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 8:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 9:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 10:
+                inserisciInCuoco(btnNo);
                 break;
 
             case 11:
@@ -105,20 +125,32 @@ public class ShopManager : MonoBehaviour
                 {
                     ShopPanelGO[btnNo].SetActive(false);
                 }
+                break;
 
-                break;        
+            case 12:
+                dialogoCuoco.velocitaCuoco--;
+
+                ShopPanels[btnNo].possedutiText.text = "Velocita':" + dialogoCuoco.velocitaCuoco + " secondi";
+
+                if (dialogoCuoco.velocitaCuoco <= 0)
+                {
+                    ShopPanelGO[btnNo].SetActive(false);
+                }
+            
+                break;
         }
     }
 
     void Update()
     {
         CheckPurcheseable();
+        CoinUI.text = "Coins:" + Coins.ToString();
     }
 
     public void AddCoins()
     {
         Coins+= 100;
-        CoinUI.text = "Coins:" + Coins.ToString();
+        //CoinUI.text = "Coins:" + Coins.ToString();
     }
 
     public void LoadPanel()
@@ -129,6 +161,7 @@ public class ShopManager : MonoBehaviour
             ShopPanels[i].descriptionText.text = ShopItemSO[i].description;
             ShopPanels[i].costText.text = "Prezzo:" + ShopItemSO[i].basecost.ToString();
             ShopPanels[i].spriteImage = ShopItemSO[i].spriteIcon;
+
         }
     }
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bubble tea al sapore di cioccolato
   basecost: 3
   spriteIcon: {fileID: 1087535490, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
+  oggetto: {fileID: 6577180837296645439, guid: 0261057abf08c5042b5f4b19f4f881f4, type: 3}

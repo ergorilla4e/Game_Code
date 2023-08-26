@@ -17,11 +17,18 @@ public class Dialogo_Cuoco : MonoBehaviour
     [SerializeField] private float speedText;
     [SerializeField] private Clock clock;
 
+    [SerializeField] private ShopTemplate[] ShopPanels;
+
+    public TMP_Text[] nuemeroBBTPosseduti;
+
     [SerializeField] private bool firstInteraction;
     [SerializeField] private GameObject windowPanel;
     [SerializeField] private GameObject[] bubbleTeaPrefab;
 
-    [SerializeField] Transform[] spawnPoints; 
+    [SerializeField] private Transform[] spawnPoints;
+
+    public int[] arrayOfBubbleTea;
+    private int grandezzaArrayBBT = 10;
 
     private int bubbleTeaScelto = 0;
 
@@ -34,6 +41,8 @@ public class Dialogo_Cuoco : MonoBehaviour
 
     private int countPositionOccupied = 0;
 
+    public int velocitaCuoco = 3;
+
     private void Start()
     {
         textComoponent.text = string.Empty;
@@ -42,6 +51,12 @@ public class Dialogo_Cuoco : MonoBehaviour
         numeroDialogo = 0;
         isPositionOccupied = new bool[spawnPoints.Length];
 
+        arrayOfBubbleTea = new int[grandezzaArrayBBT];
+
+        for(int i = 0; i < arrayOfBubbleTea.Length; i++)
+        {
+            arrayOfBubbleTea[i] = 1;
+        }
     }
 
     private void Update()
@@ -117,10 +132,11 @@ public class Dialogo_Cuoco : MonoBehaviour
                 }
             }
         }
+         
     }
 
     private void ChoseBBT()
-    {
+    {       
         StartCoroutine(IstantiateAfterSeconds(bubbleTeaScelto));
     }
 
@@ -180,13 +196,16 @@ public class Dialogo_Cuoco : MonoBehaviour
 
     IEnumerator IstantiateAfterSeconds(int bubbleTeaScelto)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(velocitaCuoco);
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if (!isPositionOccupied[i])
+            if (!isPositionOccupied[i] && arrayOfBubbleTea[bubbleTeaScelto] > 0)
             {
+                arrayOfBubbleTea[bubbleTeaScelto]--;
                 countPositionOccupied++;
+                ShopPanels[bubbleTeaScelto].possedutiText.text = "Posseduti:" + arrayOfBubbleTea[bubbleTeaScelto];
+                nuemeroBBTPosseduti[bubbleTeaScelto].text = "" + arrayOfBubbleTea[bubbleTeaScelto];
                 GameObject bubbleTeaInstance = Instantiate(bubbleTeaPrefab[bubbleTeaScelto], spawnPoints[i].position, Quaternion.identity);
                 bubbleTeaInstance.transform.parent = spawnPoints[i]; // Imposta il punto di spawn come genitore dell'istanza Bubble Tea
                 isPositionOccupied[i] = true;
