@@ -42,6 +42,16 @@ public class Movements : MonoBehaviour
         }
     }
 
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
     private void Update()
     {
         UpdateUIInventory();    

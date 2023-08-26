@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4eda81200e71d842a9b56b8f305d611, type: 3}
-  m_Name: Tavoli
+  m_Name: Bubble Tea 5
   m_EditorClassIdentifier: 
-  title: Tavolo
-  description: Espandi il negozio con un nuovo tavolo, ci saranno 2 posti in piu'
-    per i clienti
-  basecost: 50
-  spriteIcon: {fileID: 0}
+  title: coffee bubble tea
+  description: Bubble tea al sapore di caffe'
+  basecost: 3
+  spriteIcon: {fileID: -716150040, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}

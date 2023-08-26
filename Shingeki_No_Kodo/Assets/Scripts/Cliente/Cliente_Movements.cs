@@ -42,8 +42,6 @@ public class Cliente_Movements : MonoBehaviour
 
     private bool keyIsPressed = false;
 
-    private GameObject currentCustomer;
-
     private int paga;
 
     private bool consegnaBBT = false;
@@ -223,7 +221,6 @@ public class Cliente_Movements : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsCloser = true;
-            currentCustomer = this.gameObject;
         }
 
         if (other.CompareTag("Door") && _tempoAtteso > 21)
@@ -237,7 +234,6 @@ public class Cliente_Movements : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsCloser = false;
-            currentCustomer = null;
         }
     }
 

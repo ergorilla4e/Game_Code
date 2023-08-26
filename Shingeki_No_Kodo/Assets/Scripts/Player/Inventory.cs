@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
         if (itemPrefab == null)
         {
-            Debug.LogError("Prefab non trovato per l'oggetto: " + itemName);
+            //Debug.LogError("Prefab non trovato per l'oggetto: " + itemName);
             return false;
         }
 
@@ -40,12 +40,12 @@ public class Inventory : MonoBehaviour
         {
             Item newItem = new Item(itemName); // Crea un nuovo oggetto Item
             items.Add(newItem);
-            Debug.Log(itemName + " è stato aggiunto all'inventario.");
+            //Debug.Log(itemName + " è stato aggiunto all'inventario.");
             return true;
         }
         else
         {
-            Debug.Log("Non c'è spazio nell'inventario");
+            //Debug.Log("Non c'è spazio nell'inventario");
             return false;
         }
     }
@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
 
         if (itemPrefab == null)
         {
-            Debug.LogError("Prefab non trovato per l'oggetto: " + itemName);
+            //Debug.LogError("Prefab non trovato per l'oggetto: " + itemName);
             return null;
         }
 

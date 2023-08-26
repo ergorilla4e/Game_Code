@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4eda81200e71d842a9b56b8f305d611, type: 3}
   m_Name: Bubble Tea 2
   m_EditorClassIdentifier: 
-  title: Bubble Tea 1
-  description: Bubble Tea 1
-  basecost: 100
+  title: Matcha bubble tea
+  description: Bubble tea al sapore di matcha
+  basecost: 3
+  spriteIcon: {fileID: -933294120, guid: 340089def2988e742a0d8cbc4d7ab578, type: 3}
