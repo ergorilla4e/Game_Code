@@ -813,6 +813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea1
       objectReference: {fileID: 0}
+    - target: {fileID: 613574442344414105, guid: 82a63fc5cf7109f408a68f9ff5e1d707, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3516916159502273311, guid: 82a63fc5cf7109f408a68f9ff5e1d707, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -880,6 +884,10 @@ PrefabInstance:
     - target: {fileID: 6577180837296645439, guid: 0261057abf08c5042b5f4b19f4f881f4, type: 3}
       propertyPath: m_Name
       value: BubbleTea3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577180837296645439, guid: 0261057abf08c5042b5f4b19f4f881f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825716969371387525, guid: 0261057abf08c5042b5f4b19f4f881f4, type: 3}
       propertyPath: m_RootOrder
@@ -949,6 +957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea6
       objectReference: {fileID: 0}
+    - target: {fileID: 3798586975703440882, guid: 8ac482ed06a38cd4e8f916dc784dc8d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5186971515040109062, guid: 8ac482ed06a38cd4e8f916dc784dc8d2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1016,6 +1028,10 @@ PrefabInstance:
     - target: {fileID: 3440274181931956030, guid: a82aef0e67aaf404d8902b498621efac, type: 3}
       propertyPath: m_Name
       value: BubbleTea10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440274181931956030, guid: a82aef0e67aaf404d8902b498621efac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5991805266999966061, guid: a82aef0e67aaf404d8902b498621efac, type: 3}
       propertyPath: m_RootOrder
@@ -1129,6 +1145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea7
       objectReference: {fileID: 0}
+    - target: {fileID: 6055069176628257435, guid: 81141dedc9963ef48825b610bb4da33e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4645743880658372849, guid: 81141dedc9963ef48825b610bb4da33e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 81141dedc9963ef48825b610bb4da33e, type: 3}
@@ -1197,6 +1217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea9
       objectReference: {fileID: 0}
+    - target: {fileID: 1949484391689663295, guid: 74b8f1cdeb55a2246b971c6155bddb9c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5963623670206741001, guid: 74b8f1cdeb55a2246b971c6155bddb9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 74b8f1cdeb55a2246b971c6155bddb9c, type: 3}
@@ -1220,6 +1244,10 @@ PrefabInstance:
     - target: {fileID: 1672197540192369501, guid: f473ecacba9dec441912540738fe4d7a, type: 3}
       propertyPath: m_Name
       value: BubbleTea2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1672197540192369501, guid: f473ecacba9dec441912540738fe4d7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8180563339626098406, guid: f473ecacba9dec441912540738fe4d7a, type: 3}
       propertyPath: m_RootOrder
@@ -1289,6 +1317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea8
       objectReference: {fileID: 0}
+    - target: {fileID: 5034682081141101300, guid: edd4a7a5143c84548a3c2b9d8748d755, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8528019515759774620, guid: edd4a7a5143c84548a3c2b9d8748d755, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1357,6 +1389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleTea5
       objectReference: {fileID: 0}
+    - target: {fileID: 3459272151420768916, guid: 8c673420ff1205445b0aedcf6c06e9ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5837546977101030977, guid: 8c673420ff1205445b0aedcf6c06e9ad, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1424,6 +1460,10 @@ PrefabInstance:
     - target: {fileID: 2737672166966150355, guid: 418c97b6d2861194a9024109a9dc0e18, type: 3}
       propertyPath: m_Name
       value: BubbleTea4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737672166966150355, guid: 418c97b6d2861194a9024109a9dc0e18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6018946595297611468, guid: 418c97b6d2861194a9024109a9dc0e18, type: 3}
       propertyPath: m_RootOrder

@@ -54,7 +54,6 @@ public class Clock : MonoBehaviour
     {
         this.timeIsRunning = timeIsRunning;
     }
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (timeIsRunning)
