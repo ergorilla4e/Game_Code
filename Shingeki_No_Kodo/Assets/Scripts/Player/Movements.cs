@@ -15,15 +15,17 @@ public class Movements : MonoBehaviour
     private Animator animator;
 
     
-    private bool _isLookingOutside = false; //stato se sta guardando la finestra
+    
     private bool _interactiveWindow = false; // stato se può interagire con la finestra
     [SerializeField] private GameObject Canvas;
-    private Clock clock;
+
+
+
+
     private void Awake()
     {
         this.rb = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
-       
     }
 
     private void OnMovement(Vector2 direction)
@@ -46,6 +48,21 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("IsWalking", false);
         }
+    }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    private void Update()
+    {
+        UpdateUIInventory();
         if (_interactiveWindow && Input.GetKeyUp(KeyCode.Space))
         {
 
@@ -53,14 +70,9 @@ public class Movements : MonoBehaviour
         }
         else if (!_interactiveWindow)
         {
-           
+
             Canvas.SetActive(false);
         }
-    }
-   
-    private void Update()
-    {
-        UpdateUIInventory();    
     }
 
     private void FixedUpdate()
@@ -68,33 +80,15 @@ public class Movements : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector2 direction = new Vector2(h, v); 
-        //if (!_isLookingOutside)
-        //{
-            OnMovement(direction);
+        Vector2 direction = new Vector2(h, v);
 
-            this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
-                
+        OnMovement(direction);
 
-        //}
-        
+        this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
+
 
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Interazione_Finestra"))
-        {
-            _interactiveWindow = true;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Interazione_Finestra"))
-        {
-            _interactiveWindow = false;
-        }
-    }
     public void UpdateUIInventory()
     {
         for (int i = 0; i < 3; i++)
@@ -123,5 +117,23 @@ public class Movements : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Interazione_Finestra"))
+        {
+            _interactiveWindow = true;
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Interazione_Finestra"))
+        {
+            _interactiveWindow = false;
+        }
+    }
+   
 }
+
+
+
