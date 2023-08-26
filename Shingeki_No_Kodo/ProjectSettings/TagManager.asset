@@ -9,6 +9,8 @@ TagManager:
   - Slot1
   - Slot2
   - Slot3
+  - Interazione_Finestra
+  - Canvas
   layers:
   - Default
   - TransparentFX

@@ -14,10 +14,16 @@ public class Movements : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
+    
+    private bool _isLookingOutside = false; //stato se sta guardando la finestra
+    private bool _interactiveWindow = false; // stato se può interagire con la finestra
+    [SerializeField] private GameObject Canvas;
+    private Clock clock;
     private void Awake()
     {
         this.rb = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
+       
     }
 
     private void OnMovement(Vector2 direction)
@@ -40,8 +46,18 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("IsWalking", false);
         }
-    }
+        if (_interactiveWindow && Input.GetKeyUp(KeyCode.Space))
+        {
 
+            Canvas.SetActive(true);
+        }
+        else if (!_interactiveWindow)
+        {
+           
+            Canvas.SetActive(false);
+        }
+    }
+   
     private void Update()
     {
         UpdateUIInventory();    
@@ -52,14 +68,33 @@ public class Movements : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector2 direction = new Vector2(h, v);
+        Vector2 direction = new Vector2(h, v); 
+        //if (!_isLookingOutside)
+        //{
+            OnMovement(direction);
 
-        OnMovement(direction);
+            this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
+                
 
-        this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
+        //}
+        
 
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Interazione_Finestra"))
+        {
+            _interactiveWindow = true;
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Interazione_Finestra"))
+        {
+            _interactiveWindow = false;
+        }
+    }
     public void UpdateUIInventory()
     {
         for (int i = 0; i < 3; i++)
