@@ -33326,7 +33326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3442783048272245475, guid: e2307589cdc68ff4c8793336a9557ea2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3442783048272245479, guid: e2307589cdc68ff4c8793336a9557ea2, type: 3}
       propertyPath: cuoco
@@ -33422,7 +33422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3442783048280523579, guid: e2307589cdc68ff4c8793336a9557ea2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3442783048280523583, guid: e2307589cdc68ff4c8793336a9557ea2, type: 3}
       propertyPath: m_Pivot.x
