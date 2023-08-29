@@ -221,7 +221,7 @@ public class Cliente_Movements : MonoBehaviour
         {
             if (!consegnaBBT)
             {
-                UI_HumorBar.addHumor(-3);
+                UI_HumorBar.addHumor(-3 * clock.GetContatoreGiorni());
                 UI_HumorBar.UpdateGraphics();
 
                 if (UI_HumorBar.GetHumor() <= 0)
@@ -300,7 +300,7 @@ public class Cliente_Movements : MonoBehaviour
         }
         else
         {
-            UI_HumorBar.addHumor(-1);
+            UI_HumorBar.addHumor(-1 * clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
 
             if (UI_HumorBar.GetHumor() <= 0)

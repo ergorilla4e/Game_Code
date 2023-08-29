@@ -105,7 +105,7 @@ public class Dialogo_Cuoco : MonoBehaviour
                 dialoguePanel.SetActive(false);
             }
 
-            if (numeroDialogo == 2 && !dialoguePanel.activeSelf)
+            if (numeroDialogo == lines.Length - 1 && !dialoguePanel.activeSelf)
             {
                 firstInteraction = false;
             }

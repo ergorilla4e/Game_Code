@@ -13,6 +13,7 @@ public class Clock : MonoBehaviour
     [SerializeField] private bool timeIsRunning = true;
     [SerializeField] private int velocitaTimerApertura = 3;
     [SerializeField] private int velocitaTimerChiusura = 10;
+    [SerializeField] private TMP_Text Day;
 
     private int contatoreGiorni;
     private int tempoDiApertura = 480;
@@ -22,7 +23,8 @@ public class Clock : MonoBehaviour
     void Start()
     {
         timeIsRunning = true;
-        contatoreGiorni = 0;
+        contatoreGiorni = 1;
+        Day.text = "" + contatoreGiorni;
     }
 
     
@@ -75,8 +77,9 @@ public class Clock : MonoBehaviour
                 {
                     timeRemaining = 0;
                     contatoreGiorni++;
+                    Day.text = "" + contatoreGiorni;
 
-                    if (contatoreGiorni == 5)
+                    if (contatoreGiorni > 5)
                     {
                         timeIsRunning = false;
                         goToEndGameScene();
@@ -102,6 +105,11 @@ public class Clock : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timeText.text = string.Format("{00:00}:{01:00}",minutes,seconds);
+    }
+
+    public int GetContatoreGiorni()
+    {
+        return contatoreGiorni;
     }
 
 }
