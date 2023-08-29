@@ -14,7 +14,6 @@ public class Cliente_Movements : MonoBehaviour
 
     [SerializeField] private Transform[] Points;
     [SerializeField] private float MoveSpeed;
-    [SerializeField] private float Pazienza = 2;
 
     public enum iconType
     {
@@ -35,6 +34,10 @@ public class Cliente_Movements : MonoBehaviour
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
 
+    private int pazienzaHappy = 9;
+    private int pazienzaNeutral = 18;
+    private int pazienzaAngry = 27;
+
     [SerializeField] private RandomSpawner spawner;
 
     private GameObject _clientPrefab;
@@ -48,6 +51,9 @@ public class Cliente_Movements : MonoBehaviour
 
     private bool consegnaBBT = false;
 
+    [SerializeField] private HumorBar UI_HumorBar;
+    private int increaseHumor;
+    
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
@@ -62,6 +68,7 @@ public class Cliente_Movements : MonoBehaviour
         spawner = FindObjectOfType<RandomSpawner>(true);
         clock = FindObjectOfType<Clock>(true);
         shopManager = FindObjectOfType<ShopManager>(true);
+        UI_HumorBar = FindObjectOfType<HumorBar>(true);
 
         for (int i = 0; i < _BubbleTea_n.Length; i++)
         {
@@ -80,7 +87,7 @@ public class Cliente_Movements : MonoBehaviour
 
         if (clock.GetTimeIsRunning())
         {
-            if (_indexPoint < this.Points.Length && _tempoAtteso < Pazienza)
+            if (_indexPoint < this.Points.Length && _tempoAtteso < pazienzaAngry)
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
 
@@ -90,7 +97,7 @@ public class Cliente_Movements : MonoBehaviour
                     _tempoAtteso = 0;
                 }
             }
-            else if (_indexPoint > 0 && _tempoAtteso >= Pazienza)
+            else if (_indexPoint > 0 && _tempoAtteso >= pazienzaAngry)
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint - 1].transform.position, this.MoveSpeed * Time.deltaTime);
 
@@ -173,15 +180,15 @@ public class Cliente_Movements : MonoBehaviour
 
     public void chooseIcon()
     {
-        if (_tempoAtteso <= 7)
+        if (_tempoAtteso <= pazienzaHappy)
         {
             getIconSprite(iconType.happy);
         }
-        else if (_tempoAtteso <= 14 && _tempoAtteso > 7)
+        else if (_tempoAtteso <= pazienzaNeutral && _tempoAtteso > pazienzaHappy)
         {
             getIconSprite(iconType.neutral);
         }
-        else if (_tempoAtteso > 14)
+        else if (_tempoAtteso > pazienzaNeutral)
         {
             getIconSprite(iconType.angry);
         }
@@ -210,8 +217,18 @@ public class Cliente_Movements : MonoBehaviour
             playerIsCloser = true;
         }
 
-        if (other.CompareTag("Door") && _tempoAtteso > 21)
+        if (other.CompareTag("Door") && _tempoAtteso > pazienzaAngry)
         {
+            if (!consegnaBBT)
+            {
+                UI_HumorBar.addHumor(-3);
+                UI_HumorBar.UpdateGraphics();
+
+                if (UI_HumorBar.GetHumor() <= 0)
+                {
+                    clock.goToEndGameScene();
+                }
+            }
             Destroy(this.transform.parent.gameObject);
         }
     }
@@ -268,17 +285,29 @@ public class Cliente_Movements : MonoBehaviour
     }
 
     public int Pagamento()
-    { 
-        if (_tempoAtteso <= 7)
+    {
+        if (_tempoAtteso <= pazienzaHappy)
         {
+            UI_HumorBar.addHumor(6);
+            UI_HumorBar.UpdateGraphics();
             return paga = 9;
         }
-        else if (_tempoAtteso <= 14 && _tempoAtteso > 7)
+        else if (_tempoAtteso <= pazienzaNeutral && _tempoAtteso > pazienzaHappy)
         {
+            UI_HumorBar.addHumor(3);
+            UI_HumorBar.UpdateGraphics();
             return paga = 6;
         }
         else
         {
+            UI_HumorBar.addHumor(-1);
+            UI_HumorBar.UpdateGraphics();
+
+            if (UI_HumorBar.GetHumor() <= 0)
+            {
+                clock.goToEndGameScene();
+            }
+
             return paga = 3;
         }
     }
@@ -287,7 +316,7 @@ public class Cliente_Movements : MonoBehaviour
     {
         Debug.Log("Sto dando il BBT");
 
-        for(int i = 0; i < Inventory.Instance.items.Count; i++)
+        for (int i = 0; i < Inventory.Instance.items.Count; i++)
         {
             if (Inventory.Instance.items[i].name == BBT_Cliente.name)
             {
@@ -306,10 +335,10 @@ public class Cliente_Movements : MonoBehaviour
                 Debug.Log("Transazione RIUSCITA");
                 return true;
             }
-          
+
         }
         return false;
-       
+
     }
 
     public GameObject GetBubbleTea()
