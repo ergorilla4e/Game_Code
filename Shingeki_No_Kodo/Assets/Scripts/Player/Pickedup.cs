@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Pickedup : MonoBehaviour
 {
-
     public Item item = new Item("");
     private bool added = false;
 
@@ -21,6 +20,4 @@ public class Pickedup : MonoBehaviour
             }
         }
     }
-
-
 }

@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource;
+    [SerializeField] private AudioSource musicSource;
 
-    public AudioClip backGround;
+    [SerializeField] private AudioClip backGround;
 
     private void Start()
     {
-        musicSource.clip = backGround;
-        musicSource.Play();
+        this.musicSource.clip = backGround;
+        this.musicSource.Play();
     }
 
 }

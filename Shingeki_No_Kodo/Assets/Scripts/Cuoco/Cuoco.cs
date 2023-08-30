@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class Dialogo_Cuoco : MonoBehaviour
+public class Cuoco : MonoBehaviour
 {
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject dialogueSprite;
@@ -124,7 +124,6 @@ public class Dialogo_Cuoco : MonoBehaviour
         {
             if (isPositionOccupied[i])
             {
-                // Verifica se l'oggetto istanziato è null
                 if (spawnPoints[i].childCount == 0)
                 {
                     countPositionOccupied--;

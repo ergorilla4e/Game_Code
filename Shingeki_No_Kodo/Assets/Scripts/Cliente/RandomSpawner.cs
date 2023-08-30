@@ -6,14 +6,16 @@ using UnityEngine;
 public class RandomSpawner : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] public GameObject[] clientPrefabs;
+    [SerializeField] private GameObject[] clientPrefabs;
     [SerializeField] private Clock clock;
+    [SerializeField] private ShopManager shopManager;
 
     public List<int> _indiciOccupati = new List<int>();
     public List<int> indiciLiberi;
 
     private void Start()
     {
+        shopManager = FindObjectOfType<ShopManager>(true);
         StartCoroutine(SpawnInTime());
     }
 
@@ -21,11 +23,11 @@ public class RandomSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (clock.GetTimeIsRunning()) //Todo: far funzionare il codice con il timer, se si ferma non entrano i clienti
+            if (clock.GetTimeIsRunning())
             {
                 if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura())
                 {
-                    if (_indiciOccupati.Count < 5)
+                    if (_indiciOccupati.Count < 5 + (2 * shopManager.GetTavoliAcquistati()))
                     {
                         int randomIndex = GetRandomAvailableIndex();
 
@@ -41,8 +43,8 @@ public class RandomSpawner : MonoBehaviour
                     _indiciOccupati.Clear();
                 }
 
-                yield return new WaitForSeconds(Random.Range(3, 14));
-            }
+                yield return new WaitForSeconds(Random.Range(5 - clock.GetContatoreGiorni(), 10 - clock.GetContatoreGiorni()));
+            } 
             else
             {
                 yield return null; //metto in pausa lo spawn dei clienti
@@ -54,7 +56,7 @@ public class RandomSpawner : MonoBehaviour
     {
         indiciLiberi = new List<int>();
 
-        for (int i = 0; i < clientPrefabs.Length; i++)
+        for (int i = 0; i < 5 + (2 * shopManager.GetTavoliAcquistati()); i++)
         {
             if (!_indiciOccupati.Contains(i))
             {

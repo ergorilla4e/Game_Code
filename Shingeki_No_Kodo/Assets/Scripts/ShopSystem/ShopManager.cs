@@ -20,8 +20,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject cuoco;
     [SerializeField] private GameObject[] tavoli;
 
-    private Movements movementsPlayer;
-    private Dialogo_Cuoco dialogoCuoco;
+    [SerializeField] private HumorBar humor;
+
+    private Player movementsPlayer;
+    private Cuoco dialogoCuoco;
     private int tavoliAcquistati = 0;
 
     // Start is called before the first frame update
@@ -32,8 +34,8 @@ public class ShopManager : MonoBehaviour
         CoinUI.text = "Coins:" + Coins.ToString();
         LoadPanel();
         
-        movementsPlayer = player.GetComponent<Movements>();
-        dialogoCuoco = cuoco.GetComponent<Dialogo_Cuoco>();
+        movementsPlayer = player.GetComponent<Player>();
+        dialogoCuoco = cuoco.GetComponent<Cuoco>();
 
         this.Coins = 15;
     }
@@ -121,6 +123,9 @@ public class ShopManager : MonoBehaviour
                 tavoli[tavoliAcquistati].SetActive(true);
                 tavoliAcquistati++;
 
+                humor.addHumor(20);
+                humor.UpdateGraphics();
+
                 if(tavoliAcquistati >= 6)
                 {
                     ShopPanelGO[btnNo].SetActive(false);
@@ -150,7 +155,6 @@ public class ShopManager : MonoBehaviour
     public void AddCoins()
     {
         Coins+= 100;
-        //CoinUI.text = "Coins:" + Coins.ToString();
     }
 
     public void LoadPanel()
@@ -163,5 +167,10 @@ public class ShopManager : MonoBehaviour
             ShopPanels[i].spriteImage = ShopItemSO[i].spriteIcon;
 
         }
+    }
+
+    public int GetTavoliAcquistati()
+    {
+        return tavoliAcquistati;
     }
 }

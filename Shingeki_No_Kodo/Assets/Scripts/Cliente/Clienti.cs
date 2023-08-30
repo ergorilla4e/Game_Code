@@ -8,8 +8,9 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 
-public class Cliente_Movements : MonoBehaviour
+public class Clienti : MonoBehaviour
 {
 
     [SerializeField] private Transform[] Points;
@@ -34,9 +35,9 @@ public class Cliente_Movements : MonoBehaviour
     private float _tempoAtteso = 0;
     private bool playerIsCloser;
 
-    private int pazienzaHappy = 9;
-    private int pazienzaNeutral = 18;
-    private int pazienzaAngry = 27;
+    private int pazienzaHappy = 8;
+    private int pazienzaNeutral = 13;
+    private int pazienzaAngry = 18;
 
     [SerializeField] private RandomSpawner spawner;
 
@@ -52,8 +53,9 @@ public class Cliente_Movements : MonoBehaviour
     private bool consegnaBBT = false;
 
     [SerializeField] private HumorBar UI_HumorBar;
-    private int increaseHumor;
-    
+
+    private bool Losing = false;
+
     private void Start()
     {
         this.transform.position = this.Points[_indexPoint].transform.position;
@@ -87,7 +89,7 @@ public class Cliente_Movements : MonoBehaviour
 
         if (clock.GetTimeIsRunning())
         {
-            if (_indexPoint < this.Points.Length && _tempoAtteso < pazienzaAngry)
+            if (_indexPoint < this.Points.Length && _tempoAtteso < pazienzaAngry - clock.GetContatoreGiorni())
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
 
@@ -97,7 +99,7 @@ public class Cliente_Movements : MonoBehaviour
                     _tempoAtteso = 0;
                 }
             }
-            else if (_indexPoint > 0 && _tempoAtteso >= pazienzaAngry)
+            else if (_indexPoint > 0 && _tempoAtteso >= pazienzaAngry - clock.GetContatoreGiorni())
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint - 1].transform.position, this.MoveSpeed * Time.deltaTime);
 
@@ -120,8 +122,6 @@ public class Cliente_Movements : MonoBehaviour
 
 
         #endregion
-
-
 
 
         #region DIALOGO_CLIENTE_GIOCATORE
@@ -180,15 +180,15 @@ public class Cliente_Movements : MonoBehaviour
 
     public void chooseIcon()
     {
-        if (_tempoAtteso <= pazienzaHappy)
+        if (_tempoAtteso <= pazienzaHappy - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.happy);
         }
-        else if (_tempoAtteso <= pazienzaNeutral && _tempoAtteso > pazienzaHappy)
+        else if (_tempoAtteso <= pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > pazienzaHappy - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.neutral);
         }
-        else if (_tempoAtteso > pazienzaNeutral)
+        else if (_tempoAtteso > pazienzaNeutral - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.angry);
         }
@@ -217,15 +217,16 @@ public class Cliente_Movements : MonoBehaviour
             playerIsCloser = true;
         }
 
-        if (other.CompareTag("Door") && _tempoAtteso > pazienzaAngry)
+        if (other.CompareTag("Door") && _tempoAtteso > pazienzaAngry - clock.GetContatoreGiorni())
         {
             if (!consegnaBBT)
             {
                 UI_HumorBar.addHumor(-3 * clock.GetContatoreGiorni());
                 UI_HumorBar.UpdateGraphics();
 
-                if (UI_HumorBar.GetHumor() <= 0)
+                if (UI_HumorBar.GetHumor() <= 0 && !Losing)
                 {
+                    Losing = true;
                     clock.goToEndGameScene();
                 }
             }
@@ -277,6 +278,89 @@ public class Cliente_Movements : MonoBehaviour
         {
             spawner._indiciOccupati.Remove(4);
         }
+
+        _clientPrefab = GameObject.Find("Cliente6(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(5);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente7(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(6);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente8(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(7);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente9(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(8);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente10(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(9);
+        }
+        _clientPrefab = GameObject.Find("Cliente11(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(10);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente12(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(11);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente13(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(12);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente14(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(13);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente15(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(14);
+        }
+        _clientPrefab = GameObject.Find("Cliente16(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(15);
+        }
+
+        _clientPrefab = GameObject.Find("Cliente17(Clone)");
+
+        if (_clientPrefab == null)
+        {
+            spawner._indiciOccupati.Remove(16);
+        }
+        
     }
 
     public int RandomBubbleTea()
@@ -286,21 +370,21 @@ public class Cliente_Movements : MonoBehaviour
 
     public int Pagamento()
     {
-        if (_tempoAtteso <= pazienzaHappy)
+        if (_tempoAtteso <= pazienzaHappy - clock.GetContatoreGiorni())
         {
-            UI_HumorBar.addHumor(6);
+            UI_HumorBar.addHumor(7 - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
             return paga = 9;
         }
-        else if (_tempoAtteso <= pazienzaNeutral && _tempoAtteso > pazienzaHappy)
+        else if (_tempoAtteso <= pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > pazienzaHappy - clock.GetContatoreGiorni())
         {
-            UI_HumorBar.addHumor(3);
+            UI_HumorBar.addHumor(4 - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
             return paga = 6;
         }
         else
         {
-            UI_HumorBar.addHumor(-1 * clock.GetContatoreGiorni());
+            UI_HumorBar.addHumor( - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
 
             if (UI_HumorBar.GetHumor() <= 0)

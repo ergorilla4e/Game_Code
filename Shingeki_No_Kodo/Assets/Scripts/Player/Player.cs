@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Movements : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
 
@@ -13,7 +13,7 @@ public class Movements : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    private bool _interactiveWindow = false; // stato se può interagire con la finestra
+    private bool _interactiveWindow = false; //stato se può interagire con la finestra
     [SerializeField] private GameObject Canvas;
 
     private void Awake()
