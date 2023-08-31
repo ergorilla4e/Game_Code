@@ -227,7 +227,7 @@ public class Clienti : MonoBehaviour
                 if (UI_HumorBar.GetHumor() <= 0 && !Losing)
                 {
                     Losing = true;
-                    clock.goToEndGameScene();
+                    clock.goToLoseGameScene();
                 }
             }
             Destroy(this.transform.parent.gameObject);
@@ -389,7 +389,7 @@ public class Clienti : MonoBehaviour
 
             if (UI_HumorBar.GetHumor() <= 0)
             {
-                clock.goToEndGameScene();
+                clock.goToLoseGameScene();
             }
 
             return paga = 3;

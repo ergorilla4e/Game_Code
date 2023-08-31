@@ -371,7 +371,10 @@ MonoBehaviour:
   textComoponent: {fileID: 907568084}
   bottone_torna_al_menu: {fileID: 773355315}
   lines:
-  - 'Hai completato il gioco, sei stato bravissimo (credo..). '
+  - 'Hai completato il gioco, sei stato bravissimo, eccoti il premio per aver completato
+    il gioco:  coupon bubble tea gratis'
+  - 'Mostra il seguente codice alla cassa di uno dei nostri store il giorno dell''apertura
+    del locale e ricevi in omaggio un bubble tea gratis: AF62BFL2HA54SGEN8K'
   - Questo era il gioco scelto da noi studenti di Scienze E Tecnologie Dei Media
     per l'esame di Game Development con il professor Jacopo Zuliani.
   - 'Partecipanti: Walter Lista - Ester Pettinari - Thomas Chiaramonte - Matteo Romanzi

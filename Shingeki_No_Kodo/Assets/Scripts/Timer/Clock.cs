@@ -15,7 +15,7 @@ public class Clock : MonoBehaviour
     [SerializeField] private int velocitaTimerChiusura = 10;
     [SerializeField] private TMP_Text Day;
 
-    private int contatoreGiorni;
+    private int contatoreGiorni = 1;
     private int tempoDiApertura = 480;
     private int tempoDiChiusura = 1200;
 
@@ -95,6 +95,16 @@ public class Clock : MonoBehaviour
         () =>
         {
             SceneManager.LoadScene(2);
+            PassaggioScene.Instance.StartFadeToTransparent();
+        });
+    }
+
+    public void goToLoseGameScene()
+    {
+        PassaggioScene.Instance.StartFadeToOpaque(
+        () =>
+        {
+            SceneManager.LoadScene(3);
             PassaggioScene.Instance.StartFadeToTransparent();
         });
     }

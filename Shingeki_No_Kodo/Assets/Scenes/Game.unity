@@ -35636,6 +35636,8 @@ MonoBehaviour:
   - Sai che puoi interagire con gli oggetti?
   - Prova a premere "Space" vicino ad una delle finestre.
   - Ma di quelle, solo una ti rivelera' qualcosa di importante.
+  - Ah.. un'ultima cosa, in questo negozio non si sprecano risorse
+  - Pertanto non ti sara' consentito buttare i bubble tea una volta presi dal bancone.
   speedText: 0.05
   clock: {fileID: 1857138334}
   ShopPanels:

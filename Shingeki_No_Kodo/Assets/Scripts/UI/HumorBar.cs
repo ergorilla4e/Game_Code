@@ -28,6 +28,11 @@ public class HumorBar : MonoBehaviour
     public void addHumor(int Humor)
     {
         this.currentHumor += Humor;
+
+        if(this.currentHumor > maxHumor)
+        {
+            currentHumor = maxHumor; 
+        }
     }
 
 }
