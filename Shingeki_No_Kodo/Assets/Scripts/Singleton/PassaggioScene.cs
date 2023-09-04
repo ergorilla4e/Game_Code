@@ -9,7 +9,7 @@ public class PassaggioScene : MonoBehaviour
     #region PARTE DEL SINGLETON
     private static PassaggioScene _instance;
 
-    public static PassaggioScene Instance
+    public static PassaggioScene Instance //property
     {
         get
         {
@@ -24,7 +24,6 @@ public class PassaggioScene : MonoBehaviour
                     DontDestroyOnLoad( obj );
                 }
             }
-
             return _instance;
         }
     }
@@ -51,7 +50,7 @@ public class PassaggioScene : MonoBehaviour
     }
     #endregion    //Classe statica che esiste sempre all'interno del gioco
 
-    enum STATE
+    public enum STATE
     {
         TRANSPARENT,
         TO_OPAQUE,
@@ -124,7 +123,6 @@ public class PassaggioScene : MonoBehaviour
                         this.onPassaggioScenaCompletato();
                     }
                 }
-                
                 break;
 
             case STATE.TO_TRANSPARENT:

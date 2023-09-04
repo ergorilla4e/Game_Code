@@ -12,7 +12,6 @@ using UnityEngine.UIElements.Experimental;
 
 public class Clienti : MonoBehaviour
 {
-
     [SerializeField] private Transform[] Points;
     [SerializeField] private float MoveSpeed;
 
@@ -33,28 +32,36 @@ public class Clienti : MonoBehaviour
 
     private int _indexPoint = 0;
     private float _tempoAtteso = 0;
-    private bool playerIsCloser;
+    private bool _playerIsCloser;
 
-    private int pazienzaHappy = 8;
-    private int pazienzaNeutral = 13;
-    private int pazienzaAngry = 18;
+    private int _pazienzaHappy = 8;
+    private int _pazienzaNeutral = 13;
+    private int _pazienzaAngry = 18;
 
     [SerializeField] private RandomSpawner spawner;
 
     private GameObject _clientPrefab;
 
-    [SerializeField] private GameObject[] _BubbleTea_n;
-    private int bubbleTeaScelto;
+    [SerializeField] private GameObject[] BubbleTea_n;
+    private int _bubbleTeaScelto;
 
-    private bool keyIsPressed = false;
+    private bool _keyIsPressed = false;
 
-    private int paga;
+    private int _paga;
 
-    private bool consegnaBBT = false;
+    private bool _consegnaBBT = false;
 
     [SerializeField] private HumorBar UI_HumorBar;
 
-    private bool Losing = false;
+    private bool _Losing = false;
+
+    private void Awake()
+    {
+        spawner = FindObjectOfType<RandomSpawner>(true);
+        clock = FindObjectOfType<Clock>(true);
+        shopManager = FindObjectOfType<ShopManager>(true);
+        UI_HumorBar = FindObjectOfType<HumorBar>(true);
+    }
 
     private void Start()
     {
@@ -65,41 +72,37 @@ public class Clienti : MonoBehaviour
         neutralIconSprite.SetActive(false);
         angryIconSprite.SetActive(false);
 
-        bubbleTeaScelto = RandomBubbleTea();
-
-        spawner = FindObjectOfType<RandomSpawner>(true);
-        clock = FindObjectOfType<Clock>(true);
-        shopManager = FindObjectOfType<ShopManager>(true);
-        UI_HumorBar = FindObjectOfType<HumorBar>(true);
-
-        for (int i = 0; i < _BubbleTea_n.Length; i++)
+        _bubbleTeaScelto = RandomBubbleTea();
+        
+        for (int i = 0; i < BubbleTea_n.Length; i++)
         {
-            _BubbleTea_n[i].SetActive(false);
+            BubbleTea_n[i].SetActive(false);
         }
 
-        this.paga = 9;
-
+        this._paga = 9;
     }
 
     void Update()
     {
         #region SEGUI_PERCORSO
 
-        //if con orologio se timer fermo
-
+        //Se il timer dell'orologio è in funzione
         if (clock.GetTimeIsRunning())
         {
-            if (_indexPoint < this.Points.Length && _tempoAtteso < pazienzaAngry - clock.GetContatoreGiorni())
+            //Controllo se il cliente si può muovere
+            if (_indexPoint < this.Points.Length && _tempoAtteso < _pazienzaAngry - clock.GetContatoreGiorni())
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint].transform.position, this.MoveSpeed * Time.deltaTime);
 
+                //Controlla se il cliente è arrivato al point successivo
                 if (this.transform.position == this.Points[_indexPoint].transform.position)
                 {
                     this._indexPoint++;
                     _tempoAtteso = 0;
                 }
             }
-            else if (_indexPoint > 0 && _tempoAtteso >= pazienzaAngry - clock.GetContatoreGiorni())
+            //Torna indietro sul percorso sse è arrivato alla fine ed ha esaurito la pazienza
+            else if (_indexPoint > 0 && _tempoAtteso >= _pazienzaAngry - clock.GetContatoreGiorni())
             {
                 this.transform.position = Vector2.MoveTowards(this.transform.position, this.Points[_indexPoint - 1].transform.position, this.MoveSpeed * Time.deltaTime);
 
@@ -110,6 +113,7 @@ public class Clienti : MonoBehaviour
 
             }
 
+            //Scorre il tempo della pazienza del cliente
             if (_indexPoint == Points.Length)
             {
                 _tempoAtteso += Time.deltaTime;
@@ -120,33 +124,32 @@ public class Clienti : MonoBehaviour
             this.transform.position = this.transform.position; // setto la posizione del cliente a se stesso, in questo modo sembra che stia fermo 
         }
 
-
         #endregion
 
 
         #region DIALOGO_CLIENTE_GIOCATORE
 
-        if (playerIsCloser && !keyIsPressed && !consegnaBBT)
+        if (_playerIsCloser && !_keyIsPressed && !_consegnaBBT)
         {
             chooseIcon();
             balloon.SetActive(true);
         }
-        else if (!playerIsCloser && !consegnaBBT)
+        else if (!_playerIsCloser && !_consegnaBBT)
         {
-            keyIsPressed = false;
+            _keyIsPressed = false;
 
             balloon.SetActive(false);
             happyIconSprite.SetActive(false);
             neutralIconSprite.SetActive(false);
             angryIconSprite.SetActive(false);
-            _BubbleTea_n[bubbleTeaScelto].SetActive(false);
+            BubbleTea_n[_bubbleTeaScelto].SetActive(false);
         }
 
-        if (playerIsCloser && Input.GetKeyDown(KeyCode.Space))
+        if (_playerIsCloser && Input.GetKeyDown(KeyCode.Space))
         {
-            keyIsPressed = true;
+            _keyIsPressed = true;
             balloon.SetActive(true);
-            _BubbleTea_n[bubbleTeaScelto].SetActive(true);
+            BubbleTea_n[_bubbleTeaScelto].SetActive(true);
 
             happyIconSprite.SetActive(false);
             neutralIconSprite.SetActive(false);
@@ -155,14 +158,14 @@ public class Clienti : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (playerIsCloser && !consegnaBBT)
+            if (_playerIsCloser && !_consegnaBBT)
             {
-                consegnaBBT = OnBubbleTeaButtonPressed(GetBubbleTea());
+                _consegnaBBT = OnBubbleTeaButtonPressed(GetBubbleTea());
 
-                if (consegnaBBT)
+                if (_consegnaBBT)
                 {
                     balloon.SetActive(true);
-                    _BubbleTea_n[bubbleTeaScelto].SetActive(true);
+                    BubbleTea_n[_bubbleTeaScelto].SetActive(true);
 
                     happyIconSprite.SetActive(false);
                     neutralIconSprite.SetActive(false);
@@ -175,24 +178,24 @@ public class Clienti : MonoBehaviour
             }
         }
         #endregion
-
     }
 
     public void chooseIcon()
     {
-        if (_tempoAtteso <= pazienzaHappy - clock.GetContatoreGiorni())
+        if (_tempoAtteso <= _pazienzaHappy - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.happy);
         }
-        else if (_tempoAtteso <= pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > pazienzaHappy - clock.GetContatoreGiorni())
+        else if (_tempoAtteso <= _pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > _pazienzaHappy - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.neutral);
         }
-        else if (_tempoAtteso > pazienzaNeutral - clock.GetContatoreGiorni())
+        else if (_tempoAtteso > _pazienzaNeutral - clock.GetContatoreGiorni())
         {
             getIconSprite(iconType.angry);
         }
     }
+
     public void getIconSprite(iconType icon)
     {
         switch (icon)
@@ -214,19 +217,19 @@ public class Clienti : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerIsCloser = true;
+            _playerIsCloser = true;
         }
 
-        if (other.CompareTag("Door") && _tempoAtteso > pazienzaAngry - clock.GetContatoreGiorni())
+        if (other.CompareTag("Door") && _tempoAtteso > _pazienzaAngry - clock.GetContatoreGiorni())
         {
-            if (!consegnaBBT)
+            if (!_consegnaBBT)
             {
                 UI_HumorBar.addHumor(-3 * clock.GetContatoreGiorni());
                 UI_HumorBar.UpdateGraphics();
 
-                if (UI_HumorBar.GetHumor() <= 0 && !Losing)
+                if (UI_HumorBar.GetHumor() <= 0 && !_Losing)
                 {
-                    Losing = true;
+                    _Losing = true;
                     clock.goToLoseGameScene();
                 }
             }
@@ -238,164 +241,178 @@ public class Clienti : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerIsCloser = false;
+            _playerIsCloser = false;
         }
     }
 
     public void OnDestroy()
     {
-        _clientPrefab = GameObject.Find("Cliente1(Clone)");
-
-        if (_clientPrefab == null)
+        for(int i = 0; i < spawner._indiciOccupati.Count; i++)
         {
-            spawner._indiciOccupati.Remove(0);
+            _clientPrefab = GameObject.Find("Cliente" + (i+1) + "(Clone)");
+
+            if (_clientPrefab == null)
+            {
+                spawner._indiciOccupati.Remove(i);
+                _clientPrefab = null;
+            }
         }
 
-        _clientPrefab = GameObject.Find("Cliente2(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente1(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(1);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(0);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente3(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente2(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(2);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(1);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente4(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente3(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(3);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(2);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente5(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente4(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(4);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(3);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente6(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente5(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(5);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(4);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente7(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente6(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(6);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(5);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente8(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente7(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(7);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(6);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente9(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente8(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(8);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(7);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente10(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente9(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(9);
-        }
-        _clientPrefab = GameObject.Find("Cliente11(Clone)");
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(8);
+        //}
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(10);
-        }
+        //_clientPrefab = GameObject.Find("Cliente10(Clone)");
 
-        _clientPrefab = GameObject.Find("Cliente12(Clone)");
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(9);
+        //}
+        //_clientPrefab = GameObject.Find("Cliente11(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(11);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(10);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente13(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente12(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(12);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(11);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente14(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente13(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(13);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(12);
+        //}
 
-        _clientPrefab = GameObject.Find("Cliente15(Clone)");
+        //_clientPrefab = GameObject.Find("Cliente14(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(14);
-        }
-        _clientPrefab = GameObject.Find("Cliente16(Clone)");
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(13);
+        //}
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(15);
-        }
+        //_clientPrefab = GameObject.Find("Cliente15(Clone)");
 
-        _clientPrefab = GameObject.Find("Cliente17(Clone)");
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(14);
+        //}
+        //_clientPrefab = GameObject.Find("Cliente16(Clone)");
 
-        if (_clientPrefab == null)
-        {
-            spawner._indiciOccupati.Remove(16);
-        }
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(15);
+        //}
+
+        //_clientPrefab = GameObject.Find("Cliente17(Clone)");
+
+        //if (_clientPrefab == null)
+        //{
+        //    spawner._indiciOccupati.Remove(16);
+        //}
         
     }
 
     public int RandomBubbleTea()
     {
-        return UnityEngine.Random.Range(0, _BubbleTea_n.Length);
+        return UnityEngine.Random.Range(0, BubbleTea_n.Length);
     }
 
+    //funzione che restituisce un intero in base al tempo trascorso dal cliente nel negozio da seduto
     public int Pagamento()
     {
-        if (_tempoAtteso <= pazienzaHappy - clock.GetContatoreGiorni())
+        if (_tempoAtteso <= _pazienzaHappy - clock.GetContatoreGiorni())
         {
             UI_HumorBar.addHumor(7 - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
-            return paga = 9;
+            return _paga = 9;
         }
-        else if (_tempoAtteso <= pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > pazienzaHappy - clock.GetContatoreGiorni())
+        else if (_tempoAtteso <= _pazienzaNeutral - clock.GetContatoreGiorni() && _tempoAtteso > _pazienzaHappy - clock.GetContatoreGiorni())
         {
             UI_HumorBar.addHumor(4 - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
-            return paga = 6;
+            return _paga = 6;
         }
         else
         {
             UI_HumorBar.addHumor( - clock.GetContatoreGiorni());
             UI_HumorBar.UpdateGraphics();
 
+            //Se la barra dell'umore scende sotto lo zero vai alla schermata EndGame
             if (UI_HumorBar.GetHumor() <= 0)
             {
                 clock.goToLoseGameScene();
             }
 
-            return paga = 3;
+            return _paga = 3;
         }
     }
 
+    //Funzione che si occupa del pagamento e restituisce una booleana "true" se il pagamento è andato a buon fine
     public bool OnBubbleTeaButtonPressed(GameObject BBT_Cliente)
     {
         Debug.Log("Sto dando il BBT");
@@ -406,11 +423,11 @@ public class Clienti : MonoBehaviour
             {
                 Inventory.Instance.RemoveItem(Inventory.Instance.items[i]);
 
-                paga = Pagamento();
+                _paga = Pagamento();
 
-                shopManager.Coins += paga;
+                shopManager.Coins += _paga;
 
-                _BubbleTea_n[bubbleTeaScelto].SetActive(false);
+                BubbleTea_n[_bubbleTeaScelto].SetActive(false);
 
                 happyIconSprite.SetActive(false);
                 neutralIconSprite.SetActive(false);
@@ -427,7 +444,7 @@ public class Clienti : MonoBehaviour
 
     public GameObject GetBubbleTea()
     {
-        return _BubbleTea_n[bubbleTeaScelto];
+        return BubbleTea_n[_bubbleTeaScelto];
     }
 
 }

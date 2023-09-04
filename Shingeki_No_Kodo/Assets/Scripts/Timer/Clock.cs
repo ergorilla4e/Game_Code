@@ -16,18 +16,16 @@ public class Clock : MonoBehaviour
     [SerializeField] private TMP_Text Day;
 
     private int contatoreGiorni = 1;
-    private int tempoDiApertura = 480;
-    private int tempoDiChiusura = 1200;
+    private int tempoDiApertura = 480; //8:00 di mattina
+    private int tempoDiChiusura = 1200; //20:00 di sera
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         timeIsRunning = true;
         contatoreGiorni = 1;
         Day.text = "" + contatoreGiorni;
     }
 
-    
     public int GetTempoDiApertura()
     {
         return tempoDiApertura;
@@ -48,15 +46,17 @@ public class Clock : MonoBehaviour
         this.timeRemaining = timeRemaining;
     }
 
-    public bool GetTimeIsRunning ()
+    public bool GetTimeIsRunning()
     {
         return timeIsRunning;
     }
-    public void SetTimeIsRunning( bool timeIsRunning)
+
+    public void SetTimeIsRunning(bool timeIsRunning)
     {
         this.timeIsRunning = timeIsRunning;
     }
-    void FixedUpdate()
+
+    private void Update()
     {
         if (timeIsRunning)
         {
@@ -109,12 +109,13 @@ public class Clock : MonoBehaviour
         });
     }
 
-    void DisplayTime(float timeToDisplay)
+    //Funzione che formatta la visualizzazione del tempo in sessantesimi per la visualizzazione sulla UI
+    public void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = string.Format("{00:00}:{01:00}",minutes,seconds);
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60); //Restituisce le ore
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60); //Restituisce i minuti 
+        timeText.text = string.Format("{00:00}:{01:00}", minutes, seconds);
     }
 
     public int GetContatoreGiorni()

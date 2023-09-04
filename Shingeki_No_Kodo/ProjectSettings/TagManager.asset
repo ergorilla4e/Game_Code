@@ -11,6 +11,7 @@ TagManager:
   - Slot3
   - Interazione_Finestra
   - Canvas
+  - Inventario
   layers:
   - Default
   - TransparentFX

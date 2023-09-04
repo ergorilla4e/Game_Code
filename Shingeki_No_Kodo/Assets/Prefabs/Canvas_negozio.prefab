@@ -150,6 +150,7 @@ MonoBehaviour:
   player: {fileID: 0}
   cuoco: {fileID: 0}
   tavoli: []
+  humor: {fileID: 0}
 --- !u!114 &7034266296067471095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3442783048280523576
 MonoBehaviour:
   m_ObjectHideFlags: 0

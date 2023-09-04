@@ -49,11 +49,12 @@ public class Cuoco : MonoBehaviour
         dialogueSprite.SetActive(true);
         firstInteraction = true;
         numeroDialogo = 0;
-        isPositionOccupied = new bool[spawnPoints.Length];
 
-        arrayOfBubbleTea = new int[grandezzaArrayBBT];
+        isPositionOccupied = new bool[spawnPoints.Length]; //Posizioni libere dello spawn dei bubble tea 
 
-        for(int i = 0; i < arrayOfBubbleTea.Length; i++)
+        arrayOfBubbleTea = new int[grandezzaArrayBBT]; //Sono il numero di bubble tea che ha il cuoco di ognuno
+
+        for (int i = 0; i < arrayOfBubbleTea.Length; i++)
         {
             arrayOfBubbleTea[i] = 1;
         }
@@ -65,11 +66,12 @@ public class Cuoco : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && playerIsCloser)
             {
+                //Se il testo è completo va alla riga successiva
                 if (textComoponent.text == lines[_index])
                 {
                     NextLine();
                 }
-                else
+                else //Se il testo non è completo imposta il testo alla frase completa e termina la coroutine
                 {
                     StopAllCoroutines();
                     textComoponent.text = lines[_index];
@@ -78,12 +80,13 @@ public class Cuoco : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Space) && playerIsCloser)
             {
+                //Se il dialogPanel è visibile e premi space, completa la riga scritta
                 if (dialoguePanel.activeInHierarchy)
                 {
                     StopAllCoroutines();
                     textComoponent.text = lines[_index];
                 }
-                else
+                else //Starta il dialogo 
                 {
                     clock.SetTimeIsRunning(false);
                     dialogueSprite.SetActive(false);
@@ -119,7 +122,6 @@ public class Cuoco : MonoBehaviour
             }
         }
 
-
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             if (isPositionOccupied[i])
@@ -131,66 +133,74 @@ public class Cuoco : MonoBehaviour
                 }
             }
         }
-         
     }
 
     private void ChoseBBT()
-    {       
+    {
         StartCoroutine(IstantiateAfterSeconds(bubbleTeaScelto));
     }
 
     public void OnButtonClick(GameObject clickedButtonObject)
     {
-        if (clickedButtonObject.name == "BubbleTea1")
+        for (int i = 0; i < 10; i++)
         {
-            bubbleTeaScelto = 0;
-            ChoseBBT();
+            if (clickedButtonObject.name == "BubbleTea" + (i+1))
+            {
+                bubbleTeaScelto = i;
+                ChoseBBT();
+            }
         }
-        else if (clickedButtonObject.name == "BubbleTea2")
-        {
-            bubbleTeaScelto = 1;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea3")
-        {
-            bubbleTeaScelto = 2; 
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea4")
-        {
-            bubbleTeaScelto = 3;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea5")
-        {
-            bubbleTeaScelto = 4;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea6")
-        {
-            bubbleTeaScelto = 5;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea7")
-        {
-            bubbleTeaScelto = 6;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea8")
-        {
-            bubbleTeaScelto = 7;
-            ChoseBBT();
-        }
-        else if (clickedButtonObject.name == "BubbleTea9")
-        {
-            bubbleTeaScelto = 8;
-            ChoseBBT();
-        }
-        else
-        {
-            bubbleTeaScelto = 9;
-            ChoseBBT();
-        }
+
+        //if (clickedButtonObject.name == "BubbleTea1")
+        //{
+        //    bubbleTeaScelto = 0;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea2")
+        //{
+        //    bubbleTeaScelto = 1;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea3")
+        //{
+        //    bubbleTeaScelto = 2;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea4")
+        //{
+        //    bubbleTeaScelto = 3;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea5")
+        //{
+        //    bubbleTeaScelto = 4;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea6")
+        //{
+        //    bubbleTeaScelto = 5;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea7")
+        //{
+        //    bubbleTeaScelto = 6;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea8")
+        //{
+        //    bubbleTeaScelto = 7;
+        //    ChoseBBT();
+        //}
+        //else if (clickedButtonObject.name == "BubbleTea9")
+        //{
+        //    bubbleTeaScelto = 8;
+        //    ChoseBBT();
+        //}
+        //else
+        //{
+        //    bubbleTeaScelto = 9;
+        //    ChoseBBT();
+        //}
     }
 
     IEnumerator IstantiateAfterSeconds(int bubbleTeaScelto)
@@ -199,12 +209,14 @@ public class Cuoco : MonoBehaviour
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
+            //Se la posizione del tavolo non è occupata e il cuoco possiede il bubble tea allora entra nell'if
             if (!isPositionOccupied[i] && arrayOfBubbleTea[bubbleTeaScelto] > 0)
             {
                 arrayOfBubbleTea[bubbleTeaScelto]--;
                 countPositionOccupied++;
-                ShopPanels[bubbleTeaScelto].possedutiText.text = "Posseduti:" + arrayOfBubbleTea[bubbleTeaScelto];
-                nuemeroBBTPosseduti[bubbleTeaScelto].text = "" + arrayOfBubbleTea[bubbleTeaScelto];
+                ShopPanels[bubbleTeaScelto].possedutiText.text = "Posseduti:" + arrayOfBubbleTea[bubbleTeaScelto];//UI Shop
+                nuemeroBBTPosseduti[bubbleTeaScelto].text = "" + arrayOfBubbleTea[bubbleTeaScelto];//UI Cuoco
+
                 GameObject bubbleTeaInstance = Instantiate(bubbleTeaPrefab[bubbleTeaScelto], spawnPoints[i].position, Quaternion.identity);
                 bubbleTeaInstance.transform.parent = spawnPoints[i]; // Imposta il punto di spawn come genitore dell'istanza Bubble Tea
                 isPositionOccupied[i] = true;
@@ -234,6 +246,7 @@ public class Cuoco : MonoBehaviour
         }
     }
 
+    //Resetta il testo a vuoto e va alla riga successiva da scrivere
     public void NextLine()
     {
         if (_index < lines.Length - 1)

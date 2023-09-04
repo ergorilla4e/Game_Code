@@ -30,24 +30,26 @@ public class EndGame : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Se il testo è completo va alla riga successiva
             if (textComoponent.text == lines[_index])
             {
                 NextLine();
             }
-            else
+            else //Se il testo non è completo imposta il testo alla frase completa e termina la coroutine
             {
                 StopAllCoroutines();
                 textComoponent.text = lines[_index];
             }
         }
 
-        if(_contatoreInvii == 3)
+        if(_contatoreInvii == lines.Length - 1)
         {
             bottone_torna_al_menu.SetActive(true);
         }
 
     }
 
+    //Funzione che carica la scena del menu quando clicchi il bottone "Torna al menu"s
     public void ReturnToMenu()
     {
         PassaggioScene.Instance.StartFadeToOpaque(
@@ -58,6 +60,7 @@ public class EndGame : MonoBehaviour
             });
     }
 
+    //Inizia il dialogo
     public void StartDialog()
     {
         _index = 0;
@@ -65,6 +68,7 @@ public class EndGame : MonoBehaviour
         StartCoroutine(TypeLine());
     }
 
+    //Coroutine che permette di scrivere singolarmente carattere per carattere la frase
     IEnumerator TypeLine()
     {
         foreach (char c in lines[_index].ToCharArray())
@@ -74,6 +78,7 @@ public class EndGame : MonoBehaviour
         }
     }
 
+    //Resetta il testo a vuoto e va alla riga successiva da scrivere
     public void NextLine()
     {
         if (_index < lines.Length - 1)

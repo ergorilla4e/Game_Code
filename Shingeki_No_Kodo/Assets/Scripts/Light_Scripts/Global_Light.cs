@@ -5,35 +5,32 @@ using UnityEngine.Rendering.Universal;
 
 public class Global_Light : MonoBehaviour
 {
-    private Light2D lightComponent;
-    
     [SerializeField] private Clock clock;
 
-    private float graduateSpeedLight = 0.05f;
+    private Light2D _lightComponent;
+    private float _graduateSpeedLight = 0.05f;
 
-    void Start()
+    private void Awake()
     {
-        lightComponent = this.gameObject.GetComponent<Light2D>();
+        _lightComponent = this.gameObject.GetComponent<Light2D>();
     }
 
-   
-    void Update()
+    private void Update()
     {
-
-        if(clock.GetTimeRemaining() >= clock.GetTempoDiApertura() - 120 && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura() - 60)
+        //Controllo l'orario del giorno e in base a quello aggiorno la luminosità della Light2D (Sole) per dare un effetto di giorno/notte
+        if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() - 120 && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura() - 60)
         {
-            if(lightComponent.intensity <= 1f)
+            if (_lightComponent.intensity <= 1f)
             {
-                lightComponent.intensity += Time.deltaTime * graduateSpeedLight;
+                _lightComponent.intensity += Time.deltaTime * _graduateSpeedLight;
             }
         }
         else
         {
-            if(lightComponent.intensity >= 0.7f)
+            if (_lightComponent.intensity >= 0.7f)
             {
-                lightComponent.intensity -= Time.deltaTime * graduateSpeedLight;
+                _lightComponent.intensity -= Time.deltaTime * _graduateSpeedLight;
             }
         }
-
     }
 }

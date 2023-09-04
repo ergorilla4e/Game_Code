@@ -11,15 +11,13 @@ public class Fire_Light : MonoBehaviour
 
     private float graduateSpeedLight = 0.5f;
 
-    void Start()
+    private void Awake()
     {
         lightComponent = this.gameObject.GetComponent<Light2D>();
     }
 
-
-    void Update()
+    private void Update()
     {
-
         if (clock.GetTimeRemaining() >= clock.GetTempoDiApertura() - 120 && clock.GetTimeRemaining() <= clock.GetTempoDiChiusura() - 60)
         {
             if (lightComponent.intensity <= 2.3f)
@@ -34,6 +32,5 @@ public class Fire_Light : MonoBehaviour
                 lightComponent.intensity -= Time.deltaTime * graduateSpeedLight;
             }
         }
-
     }
 }

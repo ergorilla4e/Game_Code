@@ -465,7 +465,7 @@ MonoBehaviour:
   clock: {fileID: 0}
   shopManager: {fileID: 0}
   spawner: {fileID: 0}
-  _BubbleTea_n:
+  BubbleTea_n:
   - {fileID: 7168909720805744309}
   - {fileID: 3831158186537244605}
   - {fileID: 6721648275250250550}

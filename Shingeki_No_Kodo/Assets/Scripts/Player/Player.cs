@@ -7,21 +7,18 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
+    [SerializeField] private GameObject CanvasWindow;
 
-    [SerializeField] private Transform inventoryParent; 
-
-    private Rigidbody2D rb;
-    private Animator animator;
-
-    private bool _interactiveWindow = false; //stato se può interagire con la finestra
-    [SerializeField] private GameObject Canvas;
+    private Rigidbody2D _rb;
+    private Animator _animator;
 
     private void Awake()
     {
-        this.rb = GetComponent<Rigidbody2D>();
-        this.animator = GetComponent<Animator>();
+        this._rb = GetComponent<Rigidbody2D>();
+        this._animator = GetComponent<Animator>();
     }
 
+    //Funzione che prende in input il movimento del player e gestisce quale animazione mandare a schermo in base alla direzione
     private void OnMovement(Vector2 direction)
     {
         if (direction != Vector2.zero)
@@ -33,14 +30,14 @@ public class Player : MonoBehaviour
                 direction /= length;
             }
 
-            animator.SetFloat("X", direction.x);
-            animator.SetFloat("Y", direction.y);
+            _animator.SetFloat("X", direction.x);
+            _animator.SetFloat("Y", direction.y);
 
-            animator.SetBool("IsWalking", true);
+            _animator.SetBool("IsWalking", true);
         }
         else
         {
-            animator.SetBool("IsWalking", false);
+            _animator.SetBool("IsWalking", false);
         }
     }
 
@@ -51,22 +48,7 @@ public class Player : MonoBehaviour
 
     public float GetSpeed()
     {
-        return speed;
-    }
-
-    private void Update()
-    {
-        UpdateUIInventory();
-        if (_interactiveWindow && Input.GetKeyUp(KeyCode.Space))
-        {
-
-            Canvas.SetActive(true);
-        }
-        else if (!_interactiveWindow)
-        {
-
-            Canvas.SetActive(false);
-        }
+        return this.speed;
     }
 
     private void FixedUpdate()
@@ -78,52 +60,20 @@ public class Player : MonoBehaviour
 
         OnMovement(direction);
 
-        this.rb.MovePosition(this.rb.position + direction * (Time.deltaTime * this.speed));
-
+        this._rb.MovePosition(this._rb.position + direction * (Time.deltaTime * this.speed));
     }
 
-    public void UpdateUIInventory()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            Transform slotTransform = inventoryParent.GetChild(i);
-
-            if (i < Inventory.Instance.items.Count && Inventory.Instance.items[i] != null)
-            {
-                // Controlla se l'oggetto UI è già istanziato
-                if (slotTransform.childCount == 0)
-                {
-                    GameObject itemPrefab = Inventory.Instance.FindItemPrefabByName(Inventory.Instance.items[i].name);
-
-                    if (itemPrefab != null)
-                    {
-                        Instantiate(itemPrefab, slotTransform.position, Quaternion.identity, slotTransform);
-                    }
-                }
-            }
-            else
-            {
-                if (slotTransform.childCount > 0)
-                {
-                    Destroy(slotTransform.GetChild(0).gameObject);
-                }
-            }
-        }
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Interazione_Finestra"))
+        if (other.CompareTag("Interazione_Finestra"))
         {
-            _interactiveWindow = true;
+            CanvasWindow.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Interazione_Finestra"))
-        {
-            _interactiveWindow = false;
-        }
+        CanvasWindow.SetActive(false);
     }
    
 }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Diagnostics.CodeAnalysis;
 
 public class ShopManager : MonoBehaviour
-
 {
     public int Coins;
     public TMP_Text CoinUI; //player Gold
@@ -15,31 +14,33 @@ public class ShopManager : MonoBehaviour
     public GameObject[] ShopPanelGO;
     public Button[] myPurchase;
 
-
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject cuoco;
-    [SerializeField] private GameObject[] tavoli;
 
+    [SerializeField] private GameObject[] tavoli;
     [SerializeField] private HumorBar humor;
 
     private Player movementsPlayer;
     private Cuoco dialogoCuoco;
     private int tavoliAcquistati = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        for (int i = 0; i < ShopItemSO.Length; i++)
-            ShopPanelGO[i].SetActive(true);
+        movementsPlayer = player.GetComponent<Player>();
+        dialogoCuoco = cuoco.GetComponent<Cuoco>();
+    }
+
+    private void Start()
+    {
+        //Funzione che faceva comparire solo i template che avevano al loro interno degli ScriptableObject
+        //for (int i = 0; i < ShopItemSO.Length; i++)
+        //    ShopPanelGO[i].SetActive(true);
+
         CoinUI.text = "Coins:" + Coins.ToString();
         LoadPanel();
         
-        movementsPlayer = player.GetComponent<Player>();
-        dialogoCuoco = cuoco.GetComponent<Cuoco>();
-
         this.Coins = 15;
     }
-
 
     public void CheckPurcheseable()
     {
@@ -60,7 +61,6 @@ public class ShopManager : MonoBehaviour
 
             AcquistaOggetto(btnNo);
         }
-
     }
 
     public void inserisciInCuoco(int indirizzo)
@@ -165,7 +165,6 @@ public class ShopManager : MonoBehaviour
             ShopPanels[i].descriptionText.text = ShopItemSO[i].description;
             ShopPanels[i].costText.text = "Prezzo:" + ShopItemSO[i].basecost.ToString();
             ShopPanels[i].spriteImage = ShopItemSO[i].spriteIcon;
-
         }
     }
 
